@@ -5,7 +5,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
+import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
+
+import { FIREBASE_CREDENTIALS } from "../app/firebase-credentials";
+import * as firebase from 'firebase'
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -27,7 +32,7 @@ import { Settings } from '../providers/providers';
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage: any; //FirstRunPage
 
   @ViewChild(Nav) nav: Nav;
 
@@ -46,6 +51,17 @@ export class MyApp {
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+    firebase.initializeApp(FIREBASE_CREDENTIALS);
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.rootPage = FirstRunPage;
+        unsubscribe();
+      } else {
+        this.rootPage = TabsPage; //later remove string ''
+        unsubscribe();
+      }
+    });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
