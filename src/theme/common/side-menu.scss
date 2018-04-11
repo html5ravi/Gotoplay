@@ -1,0 +1,86 @@
+ion-menu {
+    .upwrap {
+        height: 170px;
+        width: 100%;
+        position: relative;
+        .userprofile {
+            height: 170px;
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+            -webkit-filter: blur(15px);
+            -moz-filter: blur(15px);
+            -o-filter: blur(15px);
+            -ms-filter: blur(15px);
+            filter: blur(15px);
+            transform: scale(1.5);
+        }
+        .user {
+            position: absolute;
+            z-index: 99;
+            top: 35%;
+            left: 50%;
+            height: 80px;
+            width: 80px;
+            margin: -40px 0 0 -40px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        h3 {
+            font-size: 15px;
+            color: #fff;
+            z-index: 99;
+            position: absolute;
+            bottom: 5px;
+            left: 0px;
+            width: 100%;
+            text-align: center;
+            span {
+                font-size: 12px;
+                display: block;
+                color: #fff;
+                line-height: 23px;
+                letter-spacing: 1px;
+            }
+        }
+    }
+    .menu-content {
+        background-color: color($colors, background, base);
+        background-image: url(assets/images/menu_bg.jpg);
+    }
+    .menu-list {
+        // margin: 0 0px 0px !important;
+        .item {
+            background-color: color($colors, background, base);
+            padding-right: 32px;
+            &:first-child {
+                border-top: solid 1px rgba($white-d, 0.15);
+            }
+            &:last-child {
+                border-bottom: solid 1px rgba($white-d, 0.15);
+            }
+            .item-inner {
+                border-bottom: 1px solid rgba($white-d, 0.15);
+                font-size: 1.4rem;
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: $theme-color-3;
+            }
+            .item-icon {
+                color: $theme-color-2;
+                font-size: 2rem;
+            }
+            &.activated {
+                background-color: $theme-color-1;
+                transition-duration: 0ms;
+                .item-inner {
+                    color: $white;
+                }
+                .item-icon {
+                    color: $white;
+                }
+            }
+        }
+    }
+}

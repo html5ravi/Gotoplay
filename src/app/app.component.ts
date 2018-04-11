@@ -57,7 +57,7 @@ export class MyApp {
         this.rootPage = FirstRunPage;
         unsubscribe();
       } else {
-        this.rootPage = TabsPage; //later remove string ''
+        this.rootPage = 'TabsPage'; //later remove string ''
         unsubscribe();
       }
     });

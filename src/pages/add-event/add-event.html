@@ -1,0 +1,283 @@
+<!--
+  Generated template for the AddEventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Create Event</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div>
+        <div class="banner" clickable id="bannerImg">
+            <img src="../assets/imgs/banners/ngv.png" id="poster" onerror="">
+        </div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input type="text" placeholder="Enter tournament title"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Sub Title</ion-label>
+            <ion-input type="text" placeholder="Optional"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label for="#startdate">Start date</ion-label>
+            <ion-input type="date" id="startdate"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label for="#starttime">Start Time</ion-label>
+            <ion-input type="time" id="starttime"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label for="#enddate">End date</ion-label>
+            <ion-input type="date" id="enddate"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label for="#endtime">End Time</ion-label>
+            <ion-input type="time" id="endtime"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>State </ion-label>
+            <ion-select interface="popover">
+                <ion-option>Karnataka</ion-option>
+                <ion-option>TamilNadu</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>City</ion-label>
+            <ion-select interface="popover">
+                <ion-option>Bangalore</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Area</ion-label>
+            <ion-input type="text" placeholder="Enter address"></ion-input>
+        </ion-item>
+    </ion-list>
+
+
+    <!--Contact Information-->
+    <ion-card>
+        <ion-card-header>
+            Contact Details
+        </ion-card-header>
+
+        <ion-card-content text-center>
+            <ion-list class="contactCard">
+                <ion-item>
+                    <ion-label>Name</ion-label>
+                    <ion-input type="text" maxlength="10"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Mobile</ion-label>
+                    <ion-input type="tel" maxlength="10"></ion-input>
+                </ion-item>
+                <!--<button ion-button class="closeBtn" color="danger" outline><ion-icon name="close"></ion-icon></button>-->
+            </ion-list>
+
+            <button ion-button color="success" class="addCircle">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-card-content>
+    </ion-card>
+
+
+
+    <!--Trophy Information-->
+    <ion-card>
+        <ion-card-header>
+            Trophy Details
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label> Trophy</ion-label>
+                <ion-toggle checked="true"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label> Medal</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label> Sports Goodies</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label> Certificate</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label> Refreshment</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label> Lunch</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <!--Match Information-->
+
+
+    <ion-card-header>
+        Match Category
+    </ion-card-header>
+    <ion-list>
+        <ion-item>
+            <ion-label>Event Type</ion-label>
+            <ion-select interface="popover">
+                <ion-option value="">Open to All</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Age Category</ion-label>
+            <ion-select interface="popover">
+                <ion-option value="">Above 40</ion-option>
+                <ion-option value="">Below 40</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <table class="table table-striped text-center table-dark">
+        <thead>
+            <tr>
+                <th width="70">#</th>
+                <th>MD</th>
+                <th>MS</th>
+                <th>WD</th>
+                <th>WS</th>
+                <th>XD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Entry</td>
+                <td>
+                    <input type="number" />
+                </td>
+                <td>
+                    <input type="number" />
+                </td>
+                <td>
+                    <input type="number" />
+                </td>
+                <td>
+                    <input type="number" />
+                </td>
+                <td>
+                    <input type="number" />
+                </td>
+            </tr>
+            <tr>
+                <td>1st Prize</td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>2nd Prize</td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>3rd Prize</td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>4th Prize</td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+                <td>
+                    <input type="text" />
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+
+    <div class="text-center">
+        <a class="link">Add another category?</a>
+    </div>
+
+    <!--Terms Information-->
+    <ion-card>
+        <ion-card-header>
+            Terms Details
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Terms</ion-label>
+                    <ion-select multiple="true">
+                        <ion-option>terms</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <div text-center>
+        <button ion-button>Add Event</button>
+    </div>
+</ion-content>

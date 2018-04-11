@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, Loading, NavController, ToastController,LoadingController, AlertController, } from 'ionic-angular';
+import { IonicPage, Loading, NavController, ToastController,LoadingController, AlertController} from 'ionic-angular';
+import { Validators, FormGroup,FormBuilder, FormControl } from '@angular/forms';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
 
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EmailValidator } from '../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
-
+import { FacebookLoginService } from '../facebook-login/facebook-login.service';
+import * as firebase from 'firebase'
 
 @IonicPage()
 @Component({
@@ -24,6 +25,11 @@ export class LoginPage {
     password: 'test'
   };
 
+
+  login: FormGroup;
+ 
+  
+
   // Our translated text strings
   private loginErrorString: string;
   public loginForm: FormGroup;
@@ -36,7 +42,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public authProvider: AuthProvider,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public facebookLoginService: FacebookLoginService,
     ) {
 
       this.loginForm = formBuilder.group({
@@ -48,9 +55,18 @@ export class LoginPage {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
-    })
+    });
+
+    
+
+    this.login = new FormGroup({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('test', Validators.required)
+    });
+
   }
 
+  
 
   loginUser(): void {
     if (!this.loginForm.valid){
@@ -89,19 +105,31 @@ export class LoginPage {
     this.navCtrl.push('ResetPasswordPage');
   }
 
-  // Attempt to login in through our User service
-  /*doLogin() {
-    this.user.login(this.account).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
-    }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
+  
+
+  // as per theme
+  doFacebookLogin() {
+    this.loading = this.loadingCtrl.create();
+
+    // Here we will check if the user is already logged in because we don't want to ask users to log in each time they open the app
+    // let this = this;
+
+    this.facebookLoginService.getFacebookUser()
+      .then((data) => {
+        // user is previously logged with FB and we have his data we will let him access the app
+        this.navCtrl.setRoot(MainPage);
+      }, (error) => {
+        //we don't have the user data so we will ask him to log in
+        this.facebookLoginService.doFacebookLogin()
+        .then((res) => {
+          this.loading.dismiss();
+          this.navCtrl.setRoot(MainPage);
+        }, (err) => {
+          console.log("Facebook Login error", err);
+        });
       });
-      toast.present();
-    });
-  }*/
+    }
+
+
+ 
 }

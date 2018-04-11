@@ -1,0 +1,30 @@
+facebook-login-page {
+    $facebook-image-heading-height: 48vh;
+    .facebook-header {
+        background: #3b5998;
+        color: #fff;
+        //@include header-styles(color($colors, facebook, base), color($colors, facebook, contrast));
+    }
+    .facebook-integration-content {
+        background-color: color($colors, background, base);
+        &.connected {
+            background: #3b5998;
+            color: #fff;
+            //@include background-image(linear-gradient(top, color($colors, facebook, base) 0%, color($colors, facebook, base) 45%, color($colors, background, base) 45%));
+        }
+        .no-connection-message {
+            margin: 30px 6% 20px;
+            color: rgba($black-d, .7);
+            line-height: 1.33;
+            text-align: center;
+        }
+        .facebook-connect-row {
+            padding: 16px;
+            .facebook-auth-button {
+                background: #3b5998;
+                color: #fff;
+                //@include call-to-action-button-styles(color($colors, facebook, base), color($colors, facebook, contrast));
+            }
+        }
+    }
+}
