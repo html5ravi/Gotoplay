@@ -19,7 +19,6 @@ import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { FIREBASE_CREDENTIALS } from "./firebase-credentials";
-import { FacebookLoginService } from '../pages/facebook-login/facebook-login.service';
 import { Facebook } from '@ionic-native/facebook';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -71,8 +70,7 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Api,
-    NativeStorage,
-    FacebookLoginService,
+    NativeStorage,    
     Facebook,
     Items,
     User,

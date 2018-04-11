@@ -33,6 +33,8 @@ export class AuthProvider {
         });
     }
 
+  
+
     //Reset password
     resetPassword(email: string): Promise<void> {
       return firebase.auth().sendPasswordResetEmail(email);
