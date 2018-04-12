@@ -16,13 +16,8 @@ page-login {
                     text-align: center;
                 }
             }
-            .signup-button {
-                font-weight: 500;
-                color: $theme-color-2;
-                .button-inner {
-                    //@include justify-content(flex-end);
-                    text-align: center;
-                }
+            .facebook-auth-button {
+                background: $fb;
             }
         }
     }

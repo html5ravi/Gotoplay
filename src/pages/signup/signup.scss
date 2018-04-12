@@ -2,4 +2,7 @@ page-signup {
     .invalid {
         border-bottom: 1px solid #ff6153;
     }
+    .facebook-auth-button {
+        background: $fb;
+    }
 }

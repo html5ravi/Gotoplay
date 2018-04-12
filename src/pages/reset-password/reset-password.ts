@@ -12,9 +12,7 @@ import { EmailValidator } from '../validators/email';
  * Ionic pages and navigation.
  */
 
-@IonicPage({
-  name: 'reset-password'
-})
+@IonicPage()
 @Component({
   selector: 'page-reset-password',
   templateUrl: 'reset-password.html',
