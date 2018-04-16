@@ -6,13 +6,410 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>fixtures</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>fixtures</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fixtures">
+    <ion-scroll scrollX=true style="height:45px;">
+        <ion-segment [(ngModel)]="fixturesTabs" style="width:500px;" aria-pressed="true">
+            <ion-segment-button value="a">
+                A
+            </ion-segment-button>
+            <ion-segment-button value="b">
+                B
+            </ion-segment-button>
+            <ion-segment-button value="c">
+                C
+            </ion-segment-button>
+            <ion-segment-button value="d">
+                D
+            </ion-segment-button>
+            <ion-segment-button value="qf">
+                QF
+            </ion-segment-button>
+            <ion-segment-button value="sf">
+                SF
+            </ion-segment-button>
+            <ion-segment-button value="f">
+                F
+            </ion-segment-button>
+        </ion-segment>
+    </ion-scroll>
+    <div [ngSwitch]="fixturesTabs" class="dbls 32teams" padding>
+        <div *ngSwitchCase="'a'">
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <a (click)="modalOpen()">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
 
+        </div>
+
+        <div *ngSwitchCase="'b'">
+
+            B
+
+        </div>
+        <div *ngSwitchCase="'c'">
+
+            C
+
+        </div>
+        <div *ngSwitchCase="'d'">
+
+            D
+
+        </div>
+        <div *ngSwitchCase="'qf'">
+
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <a href="#">
+                            <img src="assets/img/profile/200x200jordan.png" alt="">
+                            <img src="assets/img/profile/200x200kobe.png" alt="">
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+
+        </div>
+        <div *ngSwitchCase="'sf'">
+
+            <ul class="semi">
+                <li>
+                    <label>A</label>
+                    <label>
+                        Vs
+                    </label>
+                    <label>D</label>
+                </li>
+                <li>
+                    <label>B</label>
+                    <label>
+                        Vs
+                    </label>
+                    <label>C</label>
+                </li>
+            </ul>
+
+        </div>
+        <div *ngSwitchCase="'f'">
+
+            <ul class="playersOnModal">
+                <li><img src="assets/img/profile/200x200jordan.png" alt=""><span>Vinodkumar</span></li>
+                <li>&amp;</li>
+                <li><img src="assets/img/profile/200x200kobe.png" alt=""><span>Vinod kumar</span></li>
+                <li>Vs</li>
+                <li><img src="assets/img/profile/200x200jordan.png" alt=""><span>Palaniappan</span></li>
+                <li>&amp;</li>
+                <li><img src="assets/img/profile/200x200kobe.png" alt=""><span>Harsha bogle</span></li>
+            </ul>
+
+        </div>
+    </div>
+    <!--<mymodal #fixtures title="">
+
+        <button class="close" (click)="modalClose()"><ion-icon name="close"></ion-icon></button>
+        <div padding>
+            <ul class="playersOnModal">
+                <li><img src="assets/img/profile/200x200kobe.png" alt=""><span>Vinod kumar</span></li>
+                <li>Vs</li>
+                <li><img src="assets/img/profile/200x200jordan.png" alt=""><span>Palaniappan</span></li>
+                <li>&amp;</li>
+                <li><img src="assets/img/profile/200x200kobe.png" alt=""><span>Harsha bogle</span></li>
+            </ul>
+
+            <button ion-button full (click)="gotoScoreboard()">Scoreboard</button>
+        </div>
+    </mymodal>-->
 </ion-content>

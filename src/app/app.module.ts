@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule,IonicPageModule } from 'ionic-angular';
 
 import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
@@ -18,6 +18,7 @@ import { MyApp } from './app.component';
 import { AuthProvider } from '../providers/auth/auth';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { FIREBASE_CREDENTIALS } from "./firebase-credentials";
 import { Facebook } from '@ionic-native/facebook';
@@ -27,6 +28,14 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { DbProvider } from '../providers/db/db';
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
+
+import { MymodalComponent } from '../components/mymodal/mymodal';
+import { EventsService } from '../pages/events/events.service';
+import { RealdataProvider } from '../providers/realdata/realdata';
+
+
+
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -48,9 +57,11 @@ export function provideSettings(storage: Storage) {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    MymodalComponent
   ],
   imports: [
+    IonicPageModule.forChild(MymodalComponent),
     FormsModule,
     HttpModule,
     BrowserModule,
@@ -66,12 +77,16 @@ export function provideSettings(storage: Storage) {
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
+  exports:[MymodalComponent],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
   ],
   providers: [
     Api,
+    RealdataProvider,
+    AngularFirestore,
+    EventsService,
     NativeStorage,    
     Facebook,
     Items,
@@ -83,7 +98,8 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
-    DbProvider
+    DbProvider,
+    RealdataProvider
   ]
 })
 export class AppModule { }

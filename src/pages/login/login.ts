@@ -93,7 +93,9 @@ export class LoginPage {
     var provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
       var user = result.user;
-      console.log(result)   
+      console.log(result)
+      window.localStorage.setItem("currentUserId",user.uid);
+      this.navCtrl.setRoot('TabsPage');        
         firebase.database()
           .ref('/userProfile')
           .child(result.user.uid)
@@ -102,7 +104,8 @@ export class LoginPage {
             displayName: user.displayName,
             photo: user.photoURL,
             phoneNumber: user.phoneNumber
-          });     
+          });
+          
     }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -14,12 +14,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'fixtures.html',
 })
 export class FixturesPage {
-
+   @ViewChild('fixtures') mymodal;
+   fixturesTabs:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.fixturesTabs = "a";
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FixturesPage');
+  }
+  modalOpen() {
+    this.mymodal.open();
+  }
+
+  modalClose() {
+    this.mymodal.close();
+  }
+  gotoScoreboard(){
+    this.navCtrl.push('ScoreboardPage');
   }
 
 }

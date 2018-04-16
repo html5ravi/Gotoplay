@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
+// import { Items } from '../../providers/providers';
+//import * as firebase from 'firebase';
+import { RealdataProvider } from '../../providers/realdata/realdata';
+import { Observable } from 'rxjs/Observable';
+// export interface Item {title:string, subTitle:string, bannerPic:string;}
 
 @IonicPage()
 @Component({
@@ -10,11 +14,12 @@ import { Items } from '../../providers/providers';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
-  currentItems: Item[];
-
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  currentItems: Observable<Item[]>;
+  
+  constructor(public navCtrl: NavController, public rtp: RealdataProvider, public modalCtrl: ModalController) {   
+    this.currentItems = this.rtp.get('Events');
   }
+
 
   /**
    * The view loaded, let's query our items for the list
@@ -29,8 +34,9 @@ export class ListMasterPage {
   addItem() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
+      console.log(item,"adding items details");
       if (item) {
-        this.items.add(item);
+        this.rtp.add(item,'Events');
       }
     })
     addModal.present();
@@ -40,7 +46,7 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    this.items.delete(item);
+    //this.rtp.remove(item);
   }
 
   /**

@@ -1,0 +1,12 @@
+<!-- Generated template for the MymodalComponent component -->
+<section id="myModal" *ngIf='openModal' [class.modalWidget]='openModal'>
+    <div class='modalContent'>
+        <div [class.Modalbody]='openModal'>
+            <!--<div class="header">
+                <h5>{{title}}</h5>
+            </div>-->
+            <ng-content>
+            </ng-content>
+        </div>
+    </div>
+</section>
