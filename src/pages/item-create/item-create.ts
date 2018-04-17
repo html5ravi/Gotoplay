@@ -26,7 +26,9 @@ export class ItemCreatePage {
       this.form = formBuilder.group({
         bannerPic: [''],
         title: ['', Validators.required],
-        subTitle: ['']
+        subTitle: [''],
+        startDate:[''],
+        endDate:['']
       });
       
       
@@ -34,7 +36,9 @@ export class ItemCreatePage {
       this.form = formBuilder.group({
         bannerPic: this.editItem.bannerPic,
         title: this.editItem.title,
-        subTitle: this.editItem.subTitle
+        subTitle: this.editItem.subTitle,
+        startDate: this.editItem.startDate,
+        endDate: this.editItem.endDate
       });      
     }
     // Watch the form for changes, and
