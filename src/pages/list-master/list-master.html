@@ -20,15 +20,17 @@
         <ion-avatar item-start>
           <img [src]="item.bannerPic" />
         </ion-avatar>
+       
         <h2>{{item.title}}</h2>
         <p>{{item.subTitle}}</p>
-        <!--<ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>-->
       </button>
-
             <ion-item-options>
                 <button ion-button color="danger" (click)="deleteItem(item)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </button>
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+                <button ion-button color="primary" (click)="editItem(item)">
+                    Edit
+                </button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

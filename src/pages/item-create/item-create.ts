@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController,NavParams } from 'ionic-angular';
 //import { Item } from '../../models/item';
 @IonicPage()
 @Component({
@@ -12,22 +12,36 @@ export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
-
+  editItem:any;
   item: any;
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    this.form = formBuilder.group({
-      bannerPic: [''],
-      title: ['', Validators.required],
-      subTitle: ['']
-    });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
 
+    this.editItem = navParams.get('item');
+
+    //console.log(this.editItem)
+    if(!this.editItem){
+      this.form = formBuilder.group({
+        bannerPic: [''],
+        title: ['', Validators.required],
+        subTitle: ['']
+      });
+      
+      
+    }else{
+      this.form = formBuilder.group({
+        bannerPic: this.editItem.bannerPic,
+        title: this.editItem.title,
+        subTitle: this.editItem.subTitle
+      });      
+    }
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+    
   }
 
   ionViewDidLoad() {
@@ -79,5 +93,6 @@ export class ItemCreatePage {
   done() {
     if (!this.form.valid) { return; }
     this.viewCtrl.dismiss(this.form.value);
+    //console.log(this.form.value)
   }
 }

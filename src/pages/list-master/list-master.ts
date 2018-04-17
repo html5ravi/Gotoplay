@@ -18,6 +18,9 @@ export class ListMasterPage {
   
   constructor(public navCtrl: NavController, public rtp: RealdataProvider, public modalCtrl: ModalController) {   
     this.currentItems = this.rtp.get('Events');
+    this.currentItems.subscribe(data=>{
+      console.log(data);
+    })
   }
 
 
@@ -31,10 +34,9 @@ export class ListMasterPage {
    * Prompt the user to add a new item. This shows our ItemCreatePage in a
    * modal and then adds the new item to our data source if the user created one.
    */
-  addItem() {
+  addItem() {    
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
-      console.log(item,"adding items details");
       if (item) {
         this.rtp.add(item,'Events');
       }
@@ -46,9 +48,25 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    //this.rtp.remove(item);
+    this.rtp.delete(item,'Events');
   }
-
+  /**
+   * Edit an item from the list of items.
+   */
+  editItem(item:Item) {
+    let id=item.id;
+    let addModal = this.modalCtrl.create('ItemCreatePage', {
+      item: item
+    });
+    addModal.onDidDismiss(item => {
+      if (item) {
+        item.id=id;
+        console.log(item)
+        this.rtp.update(item,'Events');
+      }
+    })
+    addModal.present();    
+  }
   /**
    * Navigate to the detail page for this item.
    */

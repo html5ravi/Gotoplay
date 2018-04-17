@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
+import { RealdataProvider } from '../../providers/realdata/realdata';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -12,21 +14,25 @@ import { Items } from '../../providers/providers';
 export class SearchPage {
 
   currentItems: any = [];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
+listItems: Observable<Item[]>;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public items: RealdataProvider) { 
+    this.listItems = this.items.get('Events');
+  }
 
   /**
    * Perform a service for the proper items.
    */
+
+
   getItems(ev) {
     let val = ev.target.value;
     if (!val || !val.trim()) {
       this.currentItems = [];
       return;
     }
-    this.currentItems = this.items.query({
-      name: val
-    });
+    // this.currentItems = this.items.query({
+    //   title: val
+    // });
   }
 
   /**
