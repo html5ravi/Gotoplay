@@ -13,12 +13,12 @@ import { Item } from '../../models/item';
 @Injectable()
 export class RealdataProvider {
   private itemsCollection: AngularFirestoreCollection<Item>;
-  //items: Observable<Item[]>;
+  
  
   constructor(private readonly afs: AngularFirestore) {
     
     //this.items = this.itemsCollection.valueChanges();
-    this.itemsCollection = afs.collection<Item>('items');
+    //this.itemsCollection = afs.collection<Item>('items');
     
     }
   

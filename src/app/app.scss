@@ -9,10 +9,6 @@ button:visited {
     outline: none;
 }
 
-$output-bourbon-deprecation-warnings: false;
-@import "../assets/scss/_bourbon.scss";
-@import "../theme/common";
-$app-direction: multi;
 //$app-direction: multi;
 //Google fonts for logo and title
 // font-family: 'Merienda', cursive;

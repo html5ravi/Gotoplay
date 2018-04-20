@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 /**
  * Generated class for the EventDetailPage page.
  *
@@ -15,11 +15,43 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EventDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+   public form 			: FormGroup;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EventDetailPage');
-  }
+
+
+   constructor(public navCtrl: NavController,public navParams: NavParams,private formBuilder: FormBuilder)
+   {
+      this.form = this.formBuilder.group({
+         title       	  : ['', Validators.required],
+         contacts     : this.formBuilder.array([
+            this.initContactFields()
+         ])
+      });
+   }
+
+   initContactFields() : FormGroup
+   {
+      return this.formBuilder.group({
+         name 		: ['', Validators.required],
+         mobile 		: ['', Validators.required]
+      });
+   }
+   addContact() : void
+   {
+      const control = <FormArray>this.form.controls.contacts;
+      control.push(this.initContactFields());
+   }
+   removeContact(i : number) : void
+   {
+      const control = <FormArray>this.form.controls.contacts;
+      control.removeAt(i);
+   }
+   
+   manage(val : any) : void
+   {
+      console.dir(val);
+   }
+
+
 
 }

@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController,NavParams } from 'ionic-angular';
+import { RealdataProvider } from '../../providers/realdata/realdata';
+
 //import { Item } from '../../models/item';
 @IonicPage()
 @Component({
@@ -14,21 +16,34 @@ export class ItemCreatePage {
   isReadyToSave: boolean;
   editItem:any;
   item: any;
-
+  public contacts:any = [{mobile:"",name:""}];
+  
   form: FormGroup;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-
+  terms:any=[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
+    
     this.editItem = navParams.get('item');
+    this.terms = this.rtp.get('Terms');
 
-    //console.log(this.editItem)
+
+    
+
+    
     if(!this.editItem){
-      this.form = formBuilder.group({
+     this.form = formBuilder.group({
         bannerPic: [''],
         title: ['', Validators.required],
         subTitle: [''],
         startDate:[''],
-        endDate:['']
+        endDate:[''],
+        address1:[''],
+        address2:[''],
+        country:[''],
+        state:[''],
+        city:[''],
+        contacts: formBuilder.array([
+            this.initContactFields()
+         ]) 
       });
       
       
@@ -38,7 +53,14 @@ export class ItemCreatePage {
         title: this.editItem.title,
         subTitle: this.editItem.subTitle,
         startDate: this.editItem.startDate,
-        endDate: this.editItem.endDate
+        endDate: this.editItem.endDate,
+        address1:this.editItem.address1,
+        address2:this.editItem.address2,
+        country:this.editItem.country,
+        state:this.editItem.state,
+        city:this.editItem.city,
+        contactName:this.editItem.contactName,
+        contactMobile:this.editItem.contactMobile
       });      
     }
     // Watch the form for changes, and
@@ -48,9 +70,33 @@ export class ItemCreatePage {
     
   }
 
-  ionViewDidLoad() {
 
-  }
+
+  initContactFields() : FormGroup
+   {
+      return this.formBuilder.group({
+         name 		: ['', Validators.required],
+         mobile 		: ['', Validators.required]
+      });
+   }
+   addContact() : void
+   {
+      const control = <FormArray>this.form.controls.contacts;
+      control.push(this.initContactFields());
+   }
+   removeContact(i : number) : void
+   {
+      const control = <FormArray>this.form.controls.contacts;
+      control.removeAt(i);
+   }
+   
+   manage(val : any) : void
+   {
+      console.dir(val);
+   }
+
+
+
 
   getPicture() {
     if (Camera['installed']()) {
@@ -94,9 +140,11 @@ export class ItemCreatePage {
    * The user is done and wants to create the item, so return it
    * back to the presenter.
    */
-  done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
-    //console.log(this.form.value)
-  }
+  // done() {
+  //   if (!this.form.valid) { return; }
+  //   this.viewCtrl.dismiss(this.form.value);
+  //   //console.log(this.form.value)
+  // }
+
+  
 }

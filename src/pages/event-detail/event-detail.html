@@ -1,18 +1,60 @@
-<!--
-  Generated template for the EventDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>eventDetail</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-title>Manage</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+
+
+    <!-- Assign the FormGroup of form to the HTML form
+        via a property binding (allowing the component
+        class to communicate/interact with the template -->
+    <form [formGroup]="form" (ngSubmit)="manage(form.value)">
+        <ion-list margin-bottom>
+            <ion-item margin-bottom no-lines>
+                <ion-label floating>Framework name:</ion-label>
+
+                <!-- Assign our first FormControl of name to the input field -->
+                <ion-input type="text" maxlength="40" formControlName="title"></ion-input>
+                <span>Please enter a framework name of no more than 40 characters</span>
+            </ion-item>
+
+
+            <!-- Assign the technologies FormArray to the form
+              where we want to track/generate new input track fields -->
+            <div formArrayName="contacts" margin-bottom>
+                <section [formGroupName]="i" *ngFor="let tech of form.controls.contacts.controls; let i = index">
+                    <ion-item-group>
+                        <ion-item-divider color="light">Name #{{ i + 1 }}</ion-item-divider>
+                        <ion-item>
+                            <ion-label floating>Name:</ion-label>
+                            <ion-input type="text" maxlength="50" formControlName="name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label floating>Mobile:</ion-label>
+                            <ion-input type="tel" maxlength="50" formControlName="mobile"></ion-input>
+                        </ion-item>
+                        <span float-right ion-button icon-left clear *ngIf="form.controls.contacts.length > 1" (click)="removeContact(i)">
+                     <ion-icon name="close"></ion-icon>
+                     Remove
+                  </span>
+                    </ion-item-group>
+                </section>
+            </div>
+            <span ion-button float-left icon-left clear (click)="addContact()">
+               <ion-icon name="add"></ion-icon>
+               Add a new Contact
+         </span>
+
+
+        </ion-list>
+
+
+        <!-- Only allow form to be submitted IF validation criteria for
+              input fields has been successfully passed -->
+        <button ion-button block margin-top color="primary" text-center [disabled]="!form.valid">Submit</button>
+    </form>
 
 </ion-content>

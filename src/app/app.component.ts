@@ -54,10 +54,10 @@ export class MyApp {
     firebase.initializeApp(FIREBASE_CREDENTIALS);
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (!user) {
-        this.rootPage = FirstRunPage;
+        this.rootPage = 'ItemCreatePage';//FirstRunPage;
         unsubscribe();
       } else {
-        this.rootPage = 'TabsPage'; //later remove string ''
+        this.rootPage = 'ItemCreatePage';//'TabsPage'; //later remove string ''
         unsubscribe();
       }
     });
