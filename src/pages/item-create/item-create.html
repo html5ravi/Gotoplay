@@ -95,6 +95,25 @@
             <span ion-button float-left icon-left clear (click)="addContact()"> <ion-icon name="add"></ion-icon> </span>
         </section>
 
+        <section class="contacts">
+            <div formArrayName="category" margin-bottom>
+                <section [formGroupName]="i" *ngFor="let tech of form.controls.category.controls; let i = index">
+                    <ion-item-group>
+                        <ion-item-divider color="light">category #{{ i+1}} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
+                        <ion-icon name="close" color="danger"></ion-icon>
+                    </span></ion-item-divider>
+                        <ion-item>
+                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile"></ion-input>
+                        </ion-item>
+                    </ion-item-group>
+                </section>
+            </div>
+            <span ion-button float-left icon-left clear (click)="addCategory()"> <ion-icon name="add"></ion-icon> </span>
+        </section>
+
         <section class="info">
             <ion-card>
                 <ion-card-header>

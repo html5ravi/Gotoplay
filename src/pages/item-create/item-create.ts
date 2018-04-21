@@ -17,6 +17,7 @@ export class ItemCreatePage {
   editItem:any;
   item: any;
   public contacts:any = [{mobile:"",name:""}];
+  public category:any = [{mobile:"",name:""}];
   
   form: FormGroup;
   terms:any=[];
@@ -42,8 +43,11 @@ export class ItemCreatePage {
         state:[''],
         city:[''],
         contacts: formBuilder.array([
-            this.initContactFields()
-         ]),
+          this.initContactFields()
+        ]),
+        category: formBuilder.array([
+          this.initCategoryFields()
+        ]),
          medal:[false],
          goodies:[false],
          certificate:[false],
@@ -76,7 +80,7 @@ export class ItemCreatePage {
   }
 
 
-
+  //Contacts
   initContactFields() : FormGroup
    {
       return this.formBuilder.group({
@@ -84,6 +88,7 @@ export class ItemCreatePage {
          mobile 		: ['', Validators.required]
       });
    }
+  
    addContact() : void
    {
       const control = <FormArray>this.form.controls.contacts;
@@ -94,7 +99,29 @@ export class ItemCreatePage {
       const control = <FormArray>this.form.controls.contacts;
       control.removeAt(i);
    }
+
+   //Category
+   initCategoryFields() : FormGroup
+   {
+      return this.formBuilder.group({
+         name 		: ['', Validators.required],
+         mobile 		: ['', Validators.required]
+      });
+   }
+  
+   addCategory() : void
+   {
+      const control = <FormArray>this.form.controls.category;
+      control.push(this.initCategoryFields());
+   }
    
+   removeCategory(i : number) : void
+   {
+      const control = <FormArray>this.form.controls.category;
+      control.removeAt(i);
+   }
+   
+
    manage(val : any) : void
    {
       console.dir(val);
