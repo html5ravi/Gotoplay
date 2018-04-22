@@ -17,7 +17,7 @@ export class ItemCreatePage {
   editItem:any;
   item: any;
   public contacts:any = [{mobile:"",name:""}];
-  public category:any = [{mobile:"",name:""}];
+  public category:any = [{eventCategory:""}];
   
   form: FormGroup;
   terms:any=[];
@@ -48,6 +48,8 @@ export class ItemCreatePage {
         category: formBuilder.array([
           this.initCategoryFields()
         ]),
+        eventType:[''],
+        terms:[[],Validators.required],
          medal:[false],
          goodies:[false],
          certificate:[false],
@@ -104,8 +106,32 @@ export class ItemCreatePage {
    initCategoryFields() : FormGroup
    {
       return this.formBuilder.group({
-         name 		: ['', Validators.required],
-         mobile 		: ['', Validators.required]
+         eventCategory 		: ['', Validators.required],
+         md_entry:[''],
+         ms_entry:[''],
+         wd_entry:[''],
+         ws_entry:[''],
+         xd_entry:[''],
+         md_1st:[''],
+         ms_1st:[''],
+         wd_1st:[''],
+         ws_1st:[''],
+         xd_1st:[''],
+         md_2nd:[''],
+         ms_2nd:[''],
+         wd_2nd:[''],
+         ws_2nd:[''],
+         xd_2nd:[''],
+         md_3rd:[''],
+         ms_3rd:[''],
+         wd_3rd:[''],
+         ws_3rd:[''],
+         xd_3rd:[''],
+         md_4th:[''],
+         ms_4th:[''],
+         wd_4th:[''],
+         ws_4th:[''],
+         xd_4th:[''],
       });
    }
   

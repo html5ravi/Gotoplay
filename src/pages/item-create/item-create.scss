@@ -1,4 +1,12 @@
 page-item-create {
+    [dir="ltr"] {
+        .text-input-md {
+            width: 100%;
+            border: 1px solid #ccc !important;
+            padding: 0px;
+            margin: 0px !important;
+        }
+    }
     .profile-image-wrapper {
         text-align: center;
         margin: -23px 0 0 0;
@@ -23,8 +31,19 @@ page-item-create {
     }
     .table {
         font-size: 12px;
-        input {
-            width: 100%;
+        td {
+            padding: 5px 0px;
+            ion-input {
+                width: 96%;
+            }
+            .text-input-md {
+                width: 100%;
+                //border: 1px solid #ccc !important;
+                padding: 0px;
+                margin: 0px !important;
+                background: #e8e6e6;
+                text-align: center;
+            }
         }
     }
 }

@@ -95,19 +95,140 @@
             <span ion-button float-left icon-left clear (click)="addContact()"> <ion-icon name="add"></ion-icon> </span>
         </section>
 
-        <section class="contacts">
+        <section class="matchDetails">
+            <ion-item>
+                <ion-label>Event Type</ion-label>
+                <ion-select [(ngModel)]="eventtype" formControlName="eventType">
+                    <ion-option>Open</ion-option>
+                    <ion-option>State Level</ion-option>
+                    <ion-option>International</ion-option>
+                    <ion-option>Beginner Level</ion-option>
+                    <ion-option>Distruct Level</ion-option>
+                    <ion-option>Sausage</ion-option>
+                </ion-select>
+            </ion-item>
             <div formArrayName="category" margin-bottom>
                 <section [formGroupName]="i" *ngFor="let tech of form.controls.category.controls; let i = index">
                     <ion-item-group>
-                        <ion-item-divider color="light">category #{{ i+1}} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
+                        <ion-item-divider color="light">category: {{ category}} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
-                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name"></ion-input>
+                            <ion-label>Event Category</ion-label>
+                            <ion-select [(ngModel)]="category" formControlName="eventCategory">
+                                <ion-option>Under 11</ion-option>
+                                <ion-option>Under </ion-option>
+                                <ion-option>Extra Cheese</ion-option>
+                                <ion-option>Mushrooms</ion-option>
+                                <ion-option>Pepperoni</ion-option>
+                                <ion-option>Sausage</ion-option>
+                            </ion-select>
                         </ion-item>
-                        <ion-item>
-                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile"></ion-input>
-                        </ion-item>
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <th width="70">#</th>
+                                    <th>MD</th>
+                                    <th>MS</th>
+                                    <th>WD</th>
+                                    <th>WS</th>
+                                    <th>XD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Entry</td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="10" formControlName="md_entry"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.0" maxlength="10" formControlName="ms_entry"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.0" maxlength="10" formControlName="wd_entry"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.0" maxlength="10" formControlName="ws_entry"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.0" maxlength="10" formControlName="xd_entry"></ion-input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1st Prize</td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="md_1st"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ms_1st"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="wd_1st"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ws_1st"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="xd_1st"></ion-input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2nd Prize</td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="md_2nd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ms_2nd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="wd_2nd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ws_2nd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="xd_2nd"></ion-input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3rd Prize</td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="md_3rd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ms_3rd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="wd_3rd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ws_3rd"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="xd_3rd"></ion-input>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4th Prize</td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="md_4th"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ms_4th"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="wd_4th"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="ws_4th"></ion-input>
+                                    </td>
+                                    <td>
+                                        <ion-input type="tel" placeholder="0.00" maxlength="50" formControlName="xd_4th"></ion-input>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
                     </ion-item-group>
                 </section>
             </div>
@@ -141,6 +262,25 @@
                         <ion-label> Lunch</ion-label>
                         <ion-toggle checked="false" formControlName="lunch"></ion-toggle>
                     </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </section>
+
+        <section class="terms">
+            <ion-card>
+                <ion-card-header>
+                    Terms Details
+                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Terms</ion-label>
+                            <ion-select multiple="true" formControlName="terms">
+                                <ion-option value="{{item.id}}" *ngFor="let item of terms | async">{{item.name}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
                 </ion-card-content>
             </ion-card>
         </section>
@@ -275,24 +415,7 @@
             </table>
         </section>
 
-        <section class="terms">
-            <ion-card>
-                <ion-card-header>
-                    Terms Details
-                </ion-card-header>
-
-                <ion-card-content>
-                    <ion-list>
-                        <ion-item>
-                            <ion-label>Terms</ion-label>
-                            <ion-select multiple="true">
-                                <ion-option value="item.id" *ngFor="let item of terms | async">{{item.name}}</ion-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-list>
-                </ion-card-content>
-            </ion-card>
-        </section>-->
+        -->
         <button ion-button block margin-top color="primary" text-center [disabled]="!form.valid">Submit</button>
     </form>
 </ion-content>
