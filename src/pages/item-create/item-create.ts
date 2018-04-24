@@ -18,19 +18,28 @@ export class ItemCreatePage {
   item: any;
   public contacts:any = [{mobile:"",name:""}];
   public category:any = [{eventCategory:""}];
-  
   form: FormGroup;
+  eventItem:any={};
   terms:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
     this.editItem = navParams.get('item');
     this.terms = this.rtp.get('Terms');
 
-
+    console.log(this.editItem)
     
-
+  
     
-    if(!this.editItem){
+    
+    if(this.editItem){
+      console.log("inside")
+      this.eventItem.title="Something went wrong";
+      this.eventItem.contacts=[{
+        name:"Ravi",
+        mobile:"8754875478"
+      }];      
+    }
+
      this.form = formBuilder.group({
         bannerPic: [''],
         title: ['', Validators.required],
@@ -57,27 +66,14 @@ export class ItemCreatePage {
          lunch:[true],
       });
       
-      
-    }else{
-      this.form = formBuilder.group({
-        bannerPic: this.editItem.bannerPic,
-        title: this.editItem.title,
-        subTitle: this.editItem.subTitle,
-        startDate: this.editItem.startDate,
-        endDate: this.editItem.endDate,
-        address1:this.editItem.address1,
-        address2:this.editItem.address2,
-        country:this.editItem.country,
-        state:this.editItem.state,
-        city:this.editItem.city,
-        contactName:this.editItem.contactName,
-        contactMobile:this.editItem.contactMobile
-      });      
-    }
-    // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
+      this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+    // }else{
+    //   console.log("edit section")   
+    // }
+    // Watch the form for changes, and
+    
     
   }
 

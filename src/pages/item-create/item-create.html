@@ -24,8 +24,7 @@
 
 
 <ion-content>
-    <!--(ngSubmit)="createItem()"-->
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="manage(form.value)">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="manage(eventItem)">
         <section class="general">
             <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
             <div class="profile-image-wrapper" (click)="getPicture()">
@@ -39,34 +38,34 @@
             </div>
             <ion-list>
                 <ion-item>
-                    <ion-input type="text" placeholder="Title" formControlName="title"></ion-input>
+                    <ion-input type="text" placeholder="Title" formControlName="title" [(ngModel)]="eventItem.title"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-input type="text" placeholder="Sub title" formControlName="subTitle"></ion-input>
+                    <ion-input type="text" placeholder="Sub title" formControlName="subTitle" [(ngModel)]="eventItem.subTitle"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="Starte Date" formControlName="startDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="Starte Date" [(ngModel)]="eventItem.startDate" formControlName="startDate"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="End Date" formControlName="endDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="End Date" [(ngModel)]="eventItem.endDate" formControlName="endDate"></ion-datetime>
                 </ion-item>
             </ion-list>
             <ion-list>
                 <ion-item>
-                    <ion-input type="text" placeholder="Address 1" formControlName="address1"></ion-input>
+                    <ion-input type="text" placeholder="Address 1" formControlName="address1" [(ngModel)]="eventItem.address1"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-input type="text" placeholder="Address 2" formControlName="address2"></ion-input>
+                    <ion-input type="text" placeholder="Address 2" formControlName="address2" [(ngModel)]="eventItem.address2"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>Country</ion-label>
-                    <ion-select formControlName="country">
+                    <ion-select formControlName="country" [(ngModel)]="eventItem.country">
                         <ion-option value="IN" selected>India</ion-option>
                     </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label>State</ion-label>
-                    <ion-select formControlName="state">
+                    <ion-select formControlName="state" [(ngModel)]="eventItem.state">
                         <ion-option value="f">Tamil Nadu</ion-option>
                         <ion-option value="m">Karnataka</ion-option>
                         <ion-option value="m">Kerla</ion-option>
@@ -84,10 +83,10 @@
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
-                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name"></ion-input>
+                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name" [(ngModel)]="eventItem.contacts.name"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile"></ion-input>
+                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile" [(ngModel)]="eventItem.contacts.mobile"></ion-input>
                         </ion-item>
                     </ion-item-group>
                 </section>
@@ -98,7 +97,7 @@
         <section class="matchDetails">
             <ion-item>
                 <ion-label>Event Type</ion-label>
-                <ion-select [(ngModel)]="eventtype" formControlName="eventType">
+                <ion-select [(ngModel)]="eventItem.eventtype" formControlName="eventType">
                     <ion-option>Open</ion-option>
                     <ion-option>State Level</ion-option>
                     <ion-option>International</ion-option>
@@ -277,7 +276,7 @@
                         <ion-item>
                             <ion-label>Terms</ion-label>
                             <ion-select multiple="true" formControlName="terms">
-                                <ion-option value="{{item.id}}" *ngFor="let item of terms | async">{{item.name}}</ion-option>
+                                <ion-option *ngFor="let item of terms | async">{{item.name}}</ion-option>
                             </ion-select>
                         </ion-item>
                     </ion-list>

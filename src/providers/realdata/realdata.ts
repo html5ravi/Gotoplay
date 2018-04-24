@@ -24,11 +24,11 @@ export class RealdataProvider {
   
 
   add(obj,place) {
-    console.log(obj,"add/edit");
+    //console.log(obj,"add/edit");
     const eventCollection = this.afs.collection<Item>(place);
     eventCollection.add(obj)
     .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
+     // console.log("Document written with ID: ", docRef.id);
       obj.id=docRef.id;
       eventCollection.doc(docRef.id).set(obj);
     })

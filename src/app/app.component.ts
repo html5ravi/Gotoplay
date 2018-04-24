@@ -13,27 +13,13 @@ import { FIREBASE_CREDENTIALS } from "../app/firebase-credentials";
 import * as firebase from 'firebase'
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html',
+  selector: 'my-app',
+  //template: `<ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
   rootPage: any; //FirstRunPage
-
+  profile:any = [];
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
@@ -52,12 +38,16 @@ export class MyApp {
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     firebase.initializeApp(FIREBASE_CREDENTIALS);
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        this.rootPage = 'ItemCreatePage';//FirstRunPage;
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {     
+      //console.log(user)
+      if (!user || user == null) {
+        console.log(user)
+        this.rootPage = 'TabsPage';//FirstRunPage;
+        //window.localStorage.setItem("currentUserId",user.uid);
         unsubscribe();
       } else {
-        this.rootPage = 'ItemCreatePage';//'TabsPage'; //later remove string ''
+        console.log('else')
+        this.rootPage = 'TabsPage';//'TabsPage'; //later remove string ''
         unsubscribe();
       }
     });
@@ -69,6 +59,9 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+  }
+  logout(){
+    firebase.auth().signOut();
   }
 
   initTranslate() {
