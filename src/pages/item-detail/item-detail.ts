@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { RealdataProvider } from '../../providers/realdata/realdata';
 
 @IonicPage()
 @Component({
@@ -9,9 +9,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ItemDetailPage {
   item: any;
-  
-  constructor(public navCtrl: NavController, navParams: NavParams) {
+  currentItems:any;
+  constructor(public navCtrl: NavController, navParams: NavParams,public rtp: RealdataProvider,public modalCtrl: ModalController) {
     this.item = navParams.get('item');
+    this.currentItems = this.rtp.get('Events/'+this.item.id+'/Teams');
+    this.currentItems.subscribe(data=>{
+      console.log(data);
+    })
   }
+
+  register(id){
+    this.navCtrl.push('RegisterTeamPage', {
+      id: id
+    });
+  }
+  
 
 }

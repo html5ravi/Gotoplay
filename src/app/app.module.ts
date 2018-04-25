@@ -30,7 +30,7 @@ import { DbProvider } from '../providers/db/db';
 // in Ionic's static asset pipeline.
 
 import { MymodalComponent } from '../components/mymodal/mymodal';
-import { EventsService } from '../pages/events/events.service';
+//import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
 
 
@@ -86,7 +86,7 @@ export function provideSettings(storage: Storage) {
     Api,
     RealdataProvider,
     AngularFirestore,
-    EventsService,
+    //EventsService,
     NativeStorage,    
     Facebook,
     Items,

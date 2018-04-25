@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams,reorderArray } from 'ionic-angular'
  * Generated class for the CreateFixturePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Ionic pages and navigation. [9986367885 - Mallika Arjuna]
  */
 
 @IonicPage()
@@ -79,7 +79,9 @@ export class CreateFixturePage {
     }
   }
 
-  
+  gotoTeamRegister(){
+    
+  }
 
   reorderData(indexes: any) {
     this.songs = reorderArray(this.songs, indexes);

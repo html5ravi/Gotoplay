@@ -42,12 +42,12 @@ export class MyApp {
       //console.log(user)
       if (!user || user == null) {
         console.log(user)
-        this.rootPage = 'TabsPage';//FirstRunPage;
+        this.rootPage = 'RegisterTeamPage';//FirstRunPage;
         //window.localStorage.setItem("currentUserId",user.uid);
         unsubscribe();
       } else {
         console.log('else')
-        this.rootPage = 'TabsPage';//'TabsPage'; //later remove string ''
+        this.rootPage = 'RegisterTeamPage';//'TabsPage'; //later remove string ''
         unsubscribe();
       }
     });

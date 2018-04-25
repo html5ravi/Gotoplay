@@ -10,6 +10,7 @@
 <ion-content>
     <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.bannerPic + ')'">
     </div>
+    <button ion-button color="primary" center (click)="register(item.id)">Register your team</button>
 
     <div class="item-detail" padding>
         <h2>{{item.title}}</h2>
