@@ -1,0 +1,58 @@
+page-create-fixture {
+    .toolbar {
+        min-height: auto;
+        padding: 0px;
+        &.toolbar-md {
+            padding: 0px;
+        }
+    }
+    .fixturesList {
+        .preview {
+            margin: -13px -16px;
+            padding: 0px;
+        }
+        .label-md {
+            margin: 5px 8px 5px 0;
+            position: relative;
+            span {
+                position: absolute;
+                right: 30px;
+                top: 20%;
+                z-index: 99;
+                font-size: 3rem;
+            }
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            img {
+                height: 35px;
+                width: 35px;
+                display: inline-block;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            label {
+                font-size: 14px;
+                color: #333;
+            }
+        }
+    }
+    .item-md {
+        padding-left: 0px;
+    }
+    table {
+        width: 100%;
+        tr {
+            td {
+                padding: 5px;
+                img {
+                    border-radius: 50%;
+                    display: inline;
+                    height: 35px;
+                    width: 35px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,148 @@
+page-fixtures {
+    .scroll-content {
+        background-color: #163275;
+        color: #fff;
+    }
+    .segment-md .segment-button {
+        color: #fff;
+    }
+    .fixtures {
+        table {
+            tr:nth-child(1) td:nth-child(3),
+            tr:nth-child(1) td:nth-child(4),
+            tr:nth-child(1) td:nth-child(5) {
+                border-top: 1px solid transparent;
+                border-right: 1px solid transparent;
+            }
+            tr:nth-child(4) td:nth-child(3),
+            tr:nth-child(5) td:nth-child(3),
+            tr:last-child td:nth-child(3),
+            tr:nth-child(even) td:nth-child(4),
+            tr:nth-child(2) td:nth-child(5),
+            tr:nth-child(7) td:nth-child(5),
+            tr:nth-child(8) td:nth-child(5),
+            tr:nth-child(8) td:nth-child(3),
+            tr:nth-child(9) td:nth-child(3),
+            tr:nth-child(9) td:nth-child(5),
+            tr:nth-child(10) td:nth-child(5),
+            tr:nth-child(12) td:nth-child(3),
+            tr:nth-child(13) td:nth-child(3),
+            tr:nth-child(15) td:nth-child(5) {
+                border-right: 1px solid transparent;
+            }
+            tr:nth-child(2n+1) td:nth-child(4),
+            tr:last-child td:nth-child(4),
+            tr:last-child td:nth-child(5) {
+                border-bottom: 1px solid transparent;
+                border-right: 1px solid transparent;
+            }
+            tr:nth-child(4) td:nth-child(4),
+            tr:nth-child(8) td:nth-child(5),
+            tr:nth-child(8) td:nth-child(4),
+            tr:nth-child(even) td:nth-child(3),
+            tr:nth-child(4) td:nth-child(5),
+            tr:nth-child(12) td:nth-child(3),
+            tr:nth-child(12) td:nth-child(4),
+            tr:nth-child(12) td:nth-child(5) {
+                border-bottom: 1px solid transparent;
+            }
+            tr:nth-child(2n+1) td:nth-child(5) {
+                border-left: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+            }
+            tr td:nth-child(6) {
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+                border-right: 1px solid transparent;
+            }
+            tr:nth-child(4) td:nth-child(6),
+            tr:nth-child(12) td:nth-child(6) {
+                border-bottom: 1px solid #fff;
+            }
+            //common
+            tr {
+                td {
+                    border: 1px solid #fff;
+                    padding: 5px;
+                    img {
+                        border-radius: 50%;
+                        display: inline;
+                        height: 35px;
+                        width: 35px;
+                    }
+                }
+                & td:nth-child(1) {
+                    border-left: 0px;
+                }
+                & td:nth-child(1) {
+                    width: 20px;
+                }
+                & td:nth-child(2) {
+                    width: 90px;
+                }
+                & td:nth-child(3),
+                & td:nth-child(6) {
+                    width: 60px;
+                }
+                & td:nth-child(4),
+                & td:nth-child(5) {
+                    width: 30px;
+                }
+            }
+        }
+    }
+    .playersOnModal {
+        margin: 0px 0 10px 0;
+        padding: 0px;
+        text-align: center;
+        li {
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            span {
+                display: block;
+            }
+        }
+        li:nth-child(4) {
+            padding: 10px 0px;
+            font-size: 16px;
+        }
+        li:nth-child(2),
+        li:nth-child(6) {
+            padding: 0px 10px;
+            font-size: 16px;
+        }
+        li:nth-child(4n+4) {
+            display: block;
+        }
+    }
+    .semi {
+        margin: 0px;
+        padding: 0px;
+        li {
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+            display: block;
+            line-height: 170px;
+            label {
+                width: 32%;
+                text-align: center;
+                font-size: 85px;
+                font-weight: bold;
+            }
+             :nth-child(2) {
+                font-size: 35px;
+                font-weight: normal;
+            }
+        }
+    }
+}

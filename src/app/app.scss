@@ -1,16 +1,61 @@
-// http://ionicframework.com/docs/v2/theming/
+button,
+a,
+button:focus,
+button:active,
+a:focus,
+a:active,
+a:visited,
+button:visited {
+    outline: none;
+}
 
-
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+//$app-direction: multi;
+//Google fonts for logo and title
+// font-family: 'Merienda', cursive;
+// font-family: 'Play', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Merienda|Play');
+my-app {
+    .headerMenu {
+        position: relative;
+        height: 200px;
+        background: #ff00ff;
+        .bg {
+            position: absolute;
+            top: 0px;
+            bottom: 0;
+            left: 0;
+            width: 105%;
+            overflow: hidden;
+            z-index: 5;
+            img {
+                width: 100%;
+                filter: blur(7px);
+                margin: -10px 0px 0 -7px;
+                opacity: .9;
+            }
+        }
+        .profile {
+            position: absolute;
+            height: 80px;
+            width: 80px;
+            z-index: 10;
+            border-radius: 50%;
+            left: 50%;
+            top: 15%;
+            margin: 0 0px 0 -40px;
+            overflow: hidden;
+        }
+        .name {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            z-index: 10;
+            span {
+                color: #fff;
+                font-size: 16px;
+                font-weight: 500;
+                display: block;
+            }
+        }
+    }
+}

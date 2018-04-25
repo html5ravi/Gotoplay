@@ -6,7 +6,14 @@
  *
  * The Items service manages creating instances of Item, so go ahead and rename
  * that something that fits your app as well.
+ * 
  */
+// export interface Item {
+//   id?: string;
+//   title: string;
+//   subTitle: boolean;
+//   bannerPic:string;
+// }
 export class Item {
 
   constructor(fields: any) {

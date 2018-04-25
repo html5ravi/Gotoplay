@@ -1,0 +1,23 @@
+<ion-menu [content]="content">
+    <ion-header>
+        <div class="headerMenu">
+            <div class="bg"> <img src="{{profile.photoURL}}" alt=""></div>
+            <div class="profile"><img src="{{profile.photoURL}}" alt=""></div>
+            <div class="name">
+                <span>{{profile.displayName}}</span>
+                <span>{{profile.email}}</span>
+            </div>
+        </div>
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          {{p.title}}
+        </button>
+            <button (click)="logout()">Logout</button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>

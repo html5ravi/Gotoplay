@@ -1,2 +1,24 @@
 page-login {
+    .invalid {
+        border-bottom: 1px solid #ff6153;
+    }
+    .login-content {
+        .alt-options {
+            .button {
+                margin: 0px;
+                padding: 0px;
+                font-size: 1.4rem;
+            }
+            .forgot-button {
+                color: $white-d;
+                .button-inner {
+                    //@include justify-content(flex-start);
+                    text-align: center;
+                }
+            }
+            .facebook-auth-button {
+                background: $fb;
+            }
+        }
+    }
 }
