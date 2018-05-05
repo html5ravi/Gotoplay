@@ -15,6 +15,9 @@ button:visited {
 // font-family: 'Play', sans-serif;
 @import url('https://fonts.googleapis.com/css?family=Merienda|Play');
 my-app {
+    #ion-diagnostics-toast .ion-diagnostics-toast-message {
+        margin-top: -2px;
+    }
     .headerMenu {
         position: relative;
         height: 200px;

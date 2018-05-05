@@ -14,16 +14,15 @@
 
 
 <ion-content padding>
-
+    <!---->
     <ion-list>
         <ion-item>
             <ion-label>Choose age category</ion-label>
             <ion-select [(ngModel)]="register.category">
-                <ion-option value="below35">Below 35</ion-option>
-                <ion-option value="35+">35+</ion-option>
-                <ion-option value="45+">45+</ion-option>
+                <ion-option *ngFor="let item of categoryList" value="{{item.eventCategory}}">{{item.eventCategory}}</ion-option>
             </ion-select>
         </ion-item>
+
         <ion-item>
             <ion-input type="text" placeholder="Your Name" [(ngModel)]="register.yourName"></ion-input>
         </ion-item>

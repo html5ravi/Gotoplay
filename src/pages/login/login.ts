@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, Loading, NavController, ToastController,LoadingController, AlertController, } from 'ionic-angular';
+import { IonicPage, Loading, NavController, ToastController,LoadingController, AlertController, MenuController} from 'ionic-angular';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
@@ -36,13 +36,14 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public authProvider: AuthProvider,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public menu: MenuController,
     ) {
 
       this.loginForm = formBuilder.group({
-        email: ['',
+        email: ['html5ravi@gmail.com',
         Validators.compose([Validators.required, EmailValidator.isValid])],
-        password: ['',
+        password: ['RaviG#09',
         Validators.compose([Validators.minLength(6), Validators.required])]
       });
 
@@ -118,7 +119,17 @@ export class LoginPage {
     });
   }
 
-  // as per theme
+
+ionViewDidEnter() {
+    // the root left menu should be disabled on the tutorial page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
+  }
+  
 
 
 

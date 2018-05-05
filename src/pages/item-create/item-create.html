@@ -83,10 +83,10 @@
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
-                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name" [(ngModel)]="eventItem.contacts.name"></ion-input>
+                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile" [(ngModel)]="eventItem.contacts.mobile"></ion-input>
+                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile"></ion-input>
                         </ion-item>
                     </ion-item-group>
                 </section>
@@ -275,9 +275,9 @@
                     <ion-list>
                         <ion-item>
                             <ion-label>Terms</ion-label>
-                            <ion-select multiple="true" formControlName="terms">
+                            <!--<ion-select multiple="true" formControlName="terms">
                                 <ion-option *ngFor="let item of terms | async">{{item.name}}</ion-option>
-                            </ion-select>
+                            </ion-select>-->
                         </ion-item>
                     </ion-list>
                 </ion-card-content>

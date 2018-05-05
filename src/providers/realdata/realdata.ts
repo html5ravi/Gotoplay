@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore,AngularFirestoreCollection } from 'angularfire2/firestore';
- //import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import firebase from 'firebase';
+ import { Observable } from 'rxjs/Observable';
 import { Item } from '../../models/item';
 //export interface Item {title:string, subTitle:string, bannerPic:string;}
 /*
@@ -12,46 +13,52 @@ import { Item } from '../../models/item';
 */
 @Injectable()
 export class RealdataProvider {
-  private itemsCollection: AngularFirestoreCollection<Item>;
   
+  itemsRef: AngularFireList<any>;
+  items: Observable<any[]>;
  
-  constructor(private readonly afs: AngularFirestore) {
-    
-    //this.items = this.itemsCollection.valueChanges();
-    //this.itemsCollection = afs.collection<Item>('items');
+  constructor(private readonly db: AngularFireDatabase) {
+      
     
     }
   
-
-  add(obj,place) {
-    //console.log(obj,"add/edit");    
-        const eventCollection = this.afs.collection<Item>(place);
-        eventCollection.add(obj)
-        .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-          //obj.id=docRef.id;
-          //eventCollection.doc(docRef.id).set(obj);
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
-    
-    
-  }
-
   get(place){
-    this.itemsCollection = this.afs.collection<Item>(place);
-    return this.itemsCollection.valueChanges();
+    return this.db.list(place);
+    
+    // return new Promise((resolve) =>
+    //     {
+    //         this.itemsRef = this.db.list(place);
+    //         this.itemsRef.subscribe(data=>{
+    //             resolve(data);
+    //         });
+    //     });   
+    //return this.itemsRef = this.db.list(place);
+  }
+  add(obj,place) {
+    //console.log(obj)
+    let id = this.db.createPushId();
+    if(id){
+      obj.id = id;
+      this.db.list(place).set(id, obj);
+    }
   }
 
-  delete(obj,place){  
-    this.itemsCollection = this.afs.collection<Item>(place);
-    this.itemsCollection.doc(obj.id).delete();
+  update(place,key,obj) {
+    //this.itemsRef.update(key, obj);
+    firebase
+          .database()
+          .ref(place)
+          .child(key)
+          .set(obj);
   }
 
-  update(obj,place){  
-    this.itemsCollection = this.afs.collection<Item>(place);
-    this.itemsCollection.doc(obj.id).update(obj);
+  delete(place,key) {
+    //this.itemsRef.remove(key); 
+    this.db.list(place).remove(key);
+  }
+  
+  deleteEverything() {
+    this.itemsRef.remove();
   }
 
   

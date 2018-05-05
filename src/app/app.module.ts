@@ -32,7 +32,7 @@ import { DbProvider } from '../providers/db/db';
 import { MymodalComponent } from '../components/mymodal/mymodal';
 //import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
@@ -89,6 +89,7 @@ export function provideSettings(storage: Storage) {
     //EventsService,
     NativeStorage,    
     Facebook,
+    AngularFireDatabase,
     Items,
     User,
     Camera,

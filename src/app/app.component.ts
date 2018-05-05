@@ -18,7 +18,7 @@ import * as firebase from 'firebase'
   //template: `<ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any; //FirstRunPage
+  rootPage: any = 'TabsPage'; //FirstRunPage
   profile:any = [];
   @ViewChild(Nav) nav: Nav;
 
@@ -40,16 +40,16 @@ export class MyApp {
     firebase.initializeApp(FIREBASE_CREDENTIALS);
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {     
       //console.log(user)
-      if (!user || user == null) {
+      /*if (!user || user == null) {
         console.log(user)
-        this.rootPage = 'RegisterTeamPage';//FirstRunPage;
+        this.rootPage = 'TabsPage';//FirstRunPage;
         //window.localStorage.setItem("currentUserId",user.uid);
         unsubscribe();
       } else {
         console.log('else')
-        this.rootPage = 'RegisterTeamPage';//'TabsPage'; //later remove string ''
+        this.rootPage = FirstRunPage;//'TabsPage'; //later remove string ''
         unsubscribe();
-      }
+      }*/
     });
 
     platform.ready().then(() => {
@@ -60,6 +60,7 @@ export class MyApp {
     });
     this.initTranslate();
   }
+
   logout(){
     firebase.auth().signOut();
   }

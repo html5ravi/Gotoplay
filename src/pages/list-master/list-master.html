@@ -18,7 +18,7 @@
         <ion-item-sliding *ngFor="let item of currentItems | async">
             <button ion-item (click)="openItem(item)">
         <ion-avatar item-start>
-          <img [src]="item.bannerPic" />
+          <img [src]="item.bannerPic"/>
         </ion-avatar>
        
         <h2>{{item.title}}</h2>

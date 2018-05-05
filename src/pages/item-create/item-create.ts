@@ -16,29 +16,26 @@ export class ItemCreatePage {
   isReadyToSave: boolean;
   editItem:any;
   item: any;
-  public contacts:any = [{mobile:"",name:""}];
+  public contacts:any = [{name:"",mobile:""}];
   public category:any = [{eventCategory:""}];
   form: FormGroup;
   eventItem:any={};
   terms:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
-    this.editItem = navParams.get('item');
-    this.terms = this.rtp.get('Terms');
+    //this.editItem = navParams.get('item');
+    //this.terms = this.rtp.get('Terms');
 
-    console.log(this.editItem)
+    //console.log(this.editItem)
     
   
     
     
-    if(this.editItem){
-      console.log("inside")
-      this.eventItem.title="Something went wrong";
-      this.eventItem.contacts=[{
-        name:"Ravi",
-        mobile:"8754875478"
-      }];      
-    }
+    // if(this.editItem){
+    //   console.log("inside")
+    //   this.eventItem = this.editItem;
+        
+    // }
 
      this.form = formBuilder.group({
         bannerPic: [''],
@@ -58,22 +55,16 @@ export class ItemCreatePage {
           this.initCategoryFields()
         ]),
         eventType:[''],
-        terms:[[],Validators.required],
+        terms:[[]],
          medal:[false],
          goodies:[false],
          certificate:[false],
          refreshment:[false],
          lunch:[true],
-      });
-      
+      });      
       this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-    // }else{
-    //   console.log("edit section")   
-    // }
-    // Watch the form for changes, and
-    
+        this.isReadyToSave = this.form.valid;
+      });   
     
   }
 

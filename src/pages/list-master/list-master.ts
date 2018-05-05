@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController,LoadingController,Loading } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 // import { Items } from '../../providers/providers';
@@ -15,12 +15,17 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ListMasterPage {
   currentItems: Observable<Item[]>;
-  
-  constructor(public navCtrl: NavController, public rtp: RealdataProvider, public modalCtrl: ModalController) {   
-    this.currentItems = this.rtp.get('Events');
-    this.currentItems.subscribe(data=>{
-      console.log(data);
-    })
+  public loading: Loading;
+eventObj:any = [];
+  constructor(public navCtrl: NavController, public rtp: RealdataProvider, public modalCtrl: ModalController,
+    public loadingCtrl: LoadingController,) {
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    this.currentItems = this.rtp.get('Events').valueChanges();
+    if(this.currentItems){
+      this.loading.dismiss();
+    }
+ 
   }
 
 
@@ -49,7 +54,7 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    this.rtp.delete(item,'Events');
+    //this.rtp.delete(item.id);
   }
   /**
    * Edit an item from the list of items.
@@ -64,7 +69,7 @@ export class ListMasterPage {
       if (item) {
         item.id=id;
         console.log(item)
-        this.rtp.update(item,'Events');
+        //this.rtp.update(item,'Events');
       }
     })
     addModal.present();    

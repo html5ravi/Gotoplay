@@ -11,7 +11,9 @@
     <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.bannerPic + ')'">
     </div>
     <button ion-button color="primary" center (click)="register(item.id)">Register your team</button>
-
+    <ion-item *ngFor="let i of testarr">
+        {{i.eventCategory}}
+    </ion-item>
     <div class="item-detail" padding>
         <h2>{{item.title}}</h2>
         <p>{{item.subTitle}}</p>
