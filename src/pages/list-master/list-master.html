@@ -9,29 +9,107 @@
       </button>
         </ion-buttons>
     </ion-navbar>
+    <!--<ion-toolbar>
+        <ion-segment [(ngModel)]="events_segmnt" color="secondary">
+            <ion-segment-button value="past">
+                Past
+            </ion-segment-button>
+            <ion-segment-button value="live">
+                Live
+            </ion-segment-button>
+            <ion-segment-button value="upcoming">
+                Upcoming
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>-->
 
 </ion-header>
 
 <ion-content>
+    <ion-segment [(ngModel)]="events_segmnt" color="primary">
+        <ion-segment-button value="past">
+            past
+        </ion-segment-button>
+        <ion-segment-button value="live">
+            live
+        </ion-segment-button>
+        <ion-segment-button value="upcoming">
+            upcoming
+        </ion-segment-button>
+    </ion-segment>
 
-    <ion-list>
-        <ion-item-sliding *ngFor="let item of currentItems | async">
-            <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item.bannerPic"/>
-        </ion-avatar>
-       
-        <h2>{{item.title}}</h2>
-        <p>{{item.subTitle}}</p>
-      </button>
-            <ion-item-options>
-                <button ion-button color="danger" (click)="deleteItem(item)">
+    <div [ngSwitch]="events_segmnt">
+        <ion-list *ngSwitchCase="'past'">
+            <!--<ion-searchbar [(ngModel)]="searchText"></ion-searchbar>-->
+            <input [(ngModel)]="searchText" placeholder="search text goes here">
+            <!--<div class="mbsc-empty" *ngIf="eventObj.length == 0">
+                <h3>No Events</h3>
+            </div>-->
+            <ion-item-sliding *ngFor="let item of eventObj | eventFilter: searchText">
+                <!--<div *ngIf="upcomingEvent(item.startDate)"> {{item.startDate}}</div>-->
+                <button ion-item (click)="openItem(item)">
+                    <ion-avatar item-start>
+                    <img [src]="item.bannerPic"/>
+                    </ion-avatar>
+                
+                    <h2>{{item.title}}</h2>
+                    <!--<span>{{item.startDate | timeAgo}}</span>-->
+                    <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
+                    </button>
+                <ion-item-options>
+                    <button ion-button color="danger" (click)="deleteItem(item)">
+                        {{ 'DELETE_BUTTON' | translate }}
+                    </button>
+                    <button ion-button color="primary" (click)="editItem(item)">
+                        Edit
+                    </button>
+                </ion-item-options>
+
+            </ion-item-sliding>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'live'">
+            <ion-item-sliding *ngFor="let item of eventObj">
+                <button ion-item (click)="openItem(item)">
+                    <ion-avatar item-start>
+                    <img [src]="item.bannerPic"/>
+                    </ion-avatar>
+                
+                    <h2>{{item.title}}</h2>
+                    <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
+                </button>
+                <ion-item-options>
+                    <button ion-button color="danger" (click)="deleteItem(item)">
                     {{ 'DELETE_BUTTON' | translate }}
                 </button>
-                <button ion-button color="primary" (click)="editItem(item)">
+                    <button ion-button color="primary" (click)="editItem(item)">
                     Edit
                 </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'upcoming'">
+            <ion-item-sliding *ngFor="let item of eventObj">
+                <button ion-item (click)="openItem(item)">
+                    <ion-avatar item-start>
+                    <img [src]="item.bannerPic"/>
+                    </ion-avatar>
+                
+                    <h2>{{item.title}}</h2>
+                    <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
+                </button>
+                <ion-item-options>
+                    <button ion-button color="danger" (click)="deleteItem(item)">
+                    {{ 'DELETE_BUTTON' | translate }}
+                </button>
+                    <button ion-button color="primary" (click)="editItem(item)">
+                    Edit
+                </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
+
+
 </ion-content>

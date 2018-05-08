@@ -34,8 +34,10 @@ export class RegisterTeamPage {
   }
   registerTeam(obj){
     if(this.events.id){
-      this.rtp.add(obj,'Events/'+this.events.id+'/Teams');
+      this.rtp.add(obj,'Events/'+this.events.id+'/Teams','Registration!','Your team registered successfuly!');
+      this.viewCtrl.dismiss();
     }
   }
+  
 
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import firebase from 'firebase';
  import { Observable } from 'rxjs/Observable';
@@ -16,12 +17,27 @@ export class RealdataProvider {
   
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
- 
-  constructor(private readonly db: AngularFireDatabase) {
+  eventListRef$:AngularFireList<any>;
+  constructor(private readonly db: AngularFireDatabase,private alertCtrl: AlertController) {
       
     
-    }
+  }
   
+  //: Observable<any>
+   renderEvents(place) : Promise<any>
+    {
+        return new Promise((resolve) =>
+        {
+            this.eventListRef$ = this.db.list(place);
+            this.eventListRef$.valueChanges().subscribe(data=>{
+                resolve(data);
+            });            
+        });                       
+        
+    }
+
+  
+
   get(place){
     return this.db.list(place);
     
@@ -34,12 +50,19 @@ export class RealdataProvider {
     //     });   
     //return this.itemsRef = this.db.list(place);
   }
-  add(obj,place) {
+  add(obj,place,t,st) {
     //console.log(obj)
     let id = this.db.createPushId();
     if(id){
       obj.id = id;
-      this.db.list(place).set(id, obj);
+      return this.db.list(place).set(id, obj).then(res=>{
+          let alert = this.alertCtrl.create({
+          title: t,
+          subTitle: st,
+          buttons: ['Ok']
+        });
+        alert.present();
+      });
     }
   }
 
@@ -52,14 +75,37 @@ export class RealdataProvider {
           .set(obj);
   }
 
-  delete(place,key) {
-    //this.itemsRef.remove(key); 
-    this.db.list(place).remove(key);
+  delete(place,key,title,msg) {
+    
+        let alert = this.alertCtrl.create({
+        title: title,
+        message: msg,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              //console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.db.list(place).remove(key);
+            }
+          }
+        ]
+      });
+      alert.present();
+    
   }
-  
+
   deleteEverything() {
     this.itemsRef.remove();
   }
+
+
+
 
   
 }

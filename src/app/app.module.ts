@@ -33,7 +33,8 @@ import { MymodalComponent } from '../components/mymodal/mymodal';
 //import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import {TimeAgoPipe} from 'time-ago-pipe';
+import { StringFilterPipe} from './string-filter.pipe';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -58,9 +59,11 @@ export function provideSettings(storage: Storage) {
 @NgModule({
   declarations: [
     MyApp,
-    MymodalComponent
+    MymodalComponent,
+    TimeAgoPipe,
+    StringFilterPipe,
   ],
-  imports: [
+  imports: [    
     IonicPageModule.forChild(MymodalComponent),
     FormsModule,
     HttpModule,

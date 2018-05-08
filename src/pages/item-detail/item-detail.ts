@@ -21,6 +21,15 @@ export class ItemDetailPage {
       item: this.item
     });
   }
-  
+  fixtures(obj){
+    this.navCtrl.push('FixturesPage', {
+      item: this.item
+    });
+  }
+  create_fixtures(){
+    this.navCtrl.push('CreateFixturePage', {
+      item: this.item
+    });
+  }
 
 }
