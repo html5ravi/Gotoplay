@@ -27,13 +27,15 @@ export class ListMasterPage {
     public rtp: RealdataProvider, 
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,) {
-    this.currentItems = this.rtp.get('Events').valueChanges();
+
+      this.currentItems = this.rtp.get('Events').valueChanges();
       this.events_segmnt = "upcoming";  
       this.loading = this.loadingCtrl.create();
       this.loading.present();
       this.rtp.get('Events').valueChanges().subscribe(res=>{
         this.loading.dismiss();
       }); 
+
   }
 
   

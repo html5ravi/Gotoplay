@@ -27,23 +27,15 @@
         <div *ngSwitchCase="'create'">
             <ion-list *ngIf="teams.length != 0">
                 <ion-item-group>
-                    <ion-item *ngFor="let team of teams | async">
-
-
-
+                    <ion-item *ngFor="let team of teams; let i =index">
                         <p><img src="assets/img/profile/200x200jordan.png" id="img13">
                             <label for="img13">{{team.yourName}}</label>
                         </p>
                         <p><img src="assets/img/profile/200x200jordan.png" id="img12">
                             <label for="img12">{{team.yourPartnerName}}</label></p>
-
-
-                        <!--<ion-select [(ngModel)]="assignToPool">
-                            <ion-option value="AP">A</ion-option>
-                            <ion-option value="BP">B</ion-option>
-                            <ion-option value="CP">C</ion-option>
-                            <ion-option value="DP">D</ion-option>
-                        </ion-select>-->
+                        <select [(ngModel)]="assignToPool[i]">
+                            <option value="{{pool.name}}" *ngFor="let pool of poolArr">{{pool.name}}</option>
+                        </select>
 
 
                     </ion-item>
