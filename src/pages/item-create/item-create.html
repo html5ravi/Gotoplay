@@ -44,10 +44,10 @@
                     <ion-input type="text" placeholder="Sub title" formControlName="subTitle" [(ngModel)]="eventItem.subTitle"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="Starte Date" [(ngModel)]="eventItem.startDate" formControlName="startDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="12-31-2020" placeholder="Starte Date" [(ngModel)]="eventItem.startDate" formControlName="startDate"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="End Date" [(ngModel)]="eventItem.endDate" formControlName="endDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" min="eventItem.startDate" placeholder="End Date" [(ngModel)]="eventItem.endDate" formControlName="endDate"></ion-datetime>
                 </ion-item>
             </ion-list>
             <ion-list>
@@ -275,14 +275,13 @@
                     <ion-list>
                         <ion-item>
                             <ion-label>Terms</ion-label>
-                            <!--<ion-select multiple="true" formControlName="terms">
+                            <ion-select multiple="true" formControlName="terms">
                                 <ion-option *ngFor="let item of terms | async">{{item.name}}</ion-option>
-                            </ion-select>-->
+                            </ion-select>
                         </ion-item>
                     </ion-list>
                 </ion-card-content>
             </ion-card>
         </section>
-        <button ion-button block margin-top color="primary" text-center [disabled]="!form.valid">Submit</button>
     </form>
 </ion-content>

@@ -40,12 +40,12 @@
 
     <div [ngSwitch]="events_segmnt">
         <ion-list *ngSwitchCase="'past'">
-            <!--<ion-searchbar [(ngModel)]="searchText"></ion-searchbar>-->
-            <input [(ngModel)]="searchText" placeholder="search text goes here">
+            <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
+            <!--<input [(ngModel)]="searchText" placeholder="search text goes here">-->
             <!--<div class="mbsc-empty" *ngIf="eventObj.length == 0">
                 <h3>No Events</h3>
             </div>-->
-            <ion-item-sliding *ngFor="let item of eventObj | eventFilter: searchText">
+            <ion-item-sliding *ngFor="let item of currentItems | async | eventFilter: searchText">
                 <!--<div *ngIf="upcomingEvent(item.startDate)"> {{item.startDate}}</div>-->
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
@@ -53,7 +53,7 @@
                     </ion-avatar>
                 
                     <h2>{{item.title}}</h2>
-                    <!--<span>{{item.startDate | timeAgo}}</span>-->
+                    <p>{{item?.createdAt | timeAgo}}</p>
                     <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
                     </button>
                 <ion-item-options>
@@ -69,13 +69,13 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'live'">
-            <ion-item-sliding *ngFor="let item of eventObj">
+            <ion-item-sliding *ngFor="let item of currentItems | async">
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
                     <img [src]="item.bannerPic"/>
                     </ion-avatar>
                 
-                    <h2>{{item.title}}</h2>
+                    <h2>{{item.title}}</h2><p>{{item?.createdAt | timeAgo}}</p>
                     <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
                 </button>
                 <ion-item-options>
@@ -90,13 +90,13 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'upcoming'">
-            <ion-item-sliding *ngFor="let item of eventObj">
+            <ion-item-sliding *ngFor="let item of currentItems | async">
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
                     <img [src]="item.bannerPic"/>
                     </ion-avatar>
                 
-                    <h2>{{item.title}}</h2>
+                    <h2>{{item.title}}</h2><p>{{item?.createdAt | timeAgo}}</p>
                     <p>{{item.subTitle}}<br>{{item.startDate | date: 'medium'}}</p>
                 </button>
                 <ion-item-options>

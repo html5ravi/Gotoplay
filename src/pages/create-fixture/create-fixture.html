@@ -25,25 +25,25 @@
 <ion-content padding>
     <div [ngSwitch]="createFixture" class="fixturesList">
         <div *ngSwitchCase="'create'">
-            <ion-list>
+            <ion-list *ngIf="teams.length != 0">
                 <ion-item-group>
-                    <ion-item *ngFor="let team of teams">
+                    <ion-item *ngFor="let team of teams | async">
 
 
 
                         <p><img src="assets/img/profile/200x200jordan.png" id="img13">
-                            <label for="img13">Bhuvaneshkumar</label>
+                            <label for="img13">{{team.yourName}}</label>
                         </p>
                         <p><img src="assets/img/profile/200x200jordan.png" id="img12">
-                            <label for="img12">Bhuvaneshkumar</label></p>
+                            <label for="img12">{{team.yourPartnerName}}</label></p>
 
 
                         <!--<ion-select [(ngModel)]="assignToPool">
-                                        <ion-option value="AP">A</ion-option>
-                                        <ion-option value="BP">B</ion-option>
-                                        <ion-option value="CP">C</ion-option>
-                                        <ion-option value="DP">D</ion-option>
-                                    </ion-select>-->
+                            <ion-option value="AP">A</ion-option>
+                            <ion-option value="BP">B</ion-option>
+                            <ion-option value="CP">C</ion-option>
+                            <ion-option value="DP">D</ion-option>
+                        </ion-select>-->
 
 
                     </ion-item>
@@ -53,7 +53,7 @@
 
 
         </div>
-        <div *ngSwitchCase="'preview'" class="preview">
+        <!--<div *ngSwitchCase="'preview'" class="preview">
             <ion-segment [(ngModel)]="pools" color="primary">
                 <ion-segment-button value="a">
                     A
@@ -72,7 +72,7 @@
                 <div *ngSwitchCase="'a'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img9">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -86,7 +86,7 @@
                 <div *ngSwitchCase="'b'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img3">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -100,7 +100,7 @@
                 <div *ngSwitchCase="'c'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img5">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -126,6 +126,6 @@
                     </ion-list>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </ion-content>

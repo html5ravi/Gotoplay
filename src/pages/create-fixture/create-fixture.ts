@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,reorderArray } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { RealdataProvider } from '../../providers/realdata/realdata';
+import { Item } from '../../models/item';
 
-/**
- * Generated class for the CreateFixturePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation. [9986367885 - Mallika Arjuna]
- */
 
 @IonicPage()
 @Component({
@@ -19,9 +16,11 @@ export class CreateFixturePage {
   editing: boolean = false;
   createFixture:any;
   pools:any;
-  teams: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.teams = navParams.get('item');
+  teams: Observable<Item>;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public rtp: RealdataProvider) {
+    let item = navParams.get('item');
+    console.log(item.id)
+    this.teams = this.rtp.get('Events/'+item.id+'/Teams').valueChanges();
         this.createFixture = "create";
         this.pools = "a";
         this.songs = [

@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController,NavParams } from 'ionic-angular';
 import { RealdataProvider } from '../../providers/realdata/realdata';
-
+import { Observable } from 'rxjs/Observable';
+import { Item } from '../../models/item';
 //import { Item } from '../../models/item';
 @IonicPage()
 @Component({
@@ -20,13 +21,13 @@ export class ItemCreatePage {
   public category:any = [{eventCategory:""}];
   form: FormGroup;
   eventItem:any={};
-  terms:any=[];
+  terms:Observable<Item[]>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
     //this.editItem = navParams.get('item');
-    //this.terms = this.rtp.get('Terms');
+    this.terms = this.rtp.get('Terms').valueChanges();
 
-    //console.log(this.editItem)
+    console.log(this.terms)
     
   
     

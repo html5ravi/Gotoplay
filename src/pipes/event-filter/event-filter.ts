@@ -21,6 +21,6 @@ export class EventFilterPipe implements PipeTransform {
     }else{
       return val;
     }
-    //  return val.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    
   }
 }

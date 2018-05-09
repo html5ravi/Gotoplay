@@ -33,7 +33,6 @@ import { MymodalComponent } from '../components/mymodal/mymodal';
 //import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
 import { AngularFireDatabase } from 'angularfire2/database';
-import {TimeAgoPipe} from 'time-ago-pipe';
 import { StringFilterPipe} from './string-filter.pipe';
 
 
@@ -60,8 +59,6 @@ export function provideSettings(storage: Storage) {
   declarations: [
     MyApp,
     MymodalComponent,
-    TimeAgoPipe,
-    StringFilterPipe,
   ],
   imports: [    
     IonicPageModule.forChild(MymodalComponent),

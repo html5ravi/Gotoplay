@@ -6,7 +6,6 @@ import { Item } from '../../models/item';
 //import * as firebase from 'firebase';
 import { RealdataProvider } from '../../providers/realdata/realdata';
 import { Observable } from 'rxjs/Observable';
-import {TimeAgoPipe} from 'time-ago-pipe';
 
 // export interface Item {title:string, subTitle:string, bannerPic:string;}
 
@@ -18,8 +17,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 export class ListMasterPage {
   currentItems: Observable<Item[]>;
   public loading: Loading;
-  eventObj:any = [];
-  tempArr:any = [];
+  eventObj:Observable<any[]>;
   events_segmnt:any;
   public today : number 	= Date.now();
   searchQuery: string = '';
@@ -29,21 +27,16 @@ export class ListMasterPage {
     public rtp: RealdataProvider, 
     public modalCtrl: ModalController,
     public loadingCtrl: LoadingController,) {
-    //this.currentItems = this.rtp.get('Events').valueChanges();  
-      this.events_segmnt = "upcoming";   
+    this.currentItems = this.rtp.get('Events').valueChanges();
+      this.events_segmnt = "upcoming";  
       this.loading = this.loadingCtrl.create();
       this.loading.present();
-      this.rtp.renderEvents('Events').then(data=>{
-        console.log(data)
+      this.rtp.get('Events').valueChanges().subscribe(res=>{
         this.loading.dismiss();
-        this.eventObj = data;
-      });
-      //this.eventsList();   
+      }); 
   }
 
-  eventsList(){
-    this.tempArr = this.eventObj;
-  }
+  
   
 
   /**
@@ -68,10 +61,11 @@ export class ListMasterPage {
 
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
+      item.createdAt = this.today;
       if (item) {
-        item.createdAt = this.today;
         //console.log(item)
         this.rtp.add(item,'Events','Added Successfuly!','Your Event Adde Successfuly, Please wait for the Admin approval to show in public.');
+        
       }
     })
     addModal.present();
@@ -110,31 +104,5 @@ export class ListMasterPage {
     });
   }
 
-  // ionViewDidLoad() {
-  //   this.setFilteredLocations();
-  // }
-
-  // setFilteredLocations(){
-  //   return this.filterLocations(this.searchTerm);
-  // }
-
-  // filterLocations(searchTerm:any){
-  //   console.log(searchTerm)
-  //    this.eventsList();
-  //    if (searchTerm && searchTerm.trim() != '') {
-  //       this.eventObj = this.eventObj.filter((item) => {
-  //           return (item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-  //       });
-  //     }
-    
-  // }
-
-
-
-
-
-
-
-
-
+  
 }
