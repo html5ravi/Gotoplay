@@ -98,29 +98,20 @@
             <ion-item>
                 <ion-label>Event Type</ion-label>
                 <ion-select [(ngModel)]="eventItem.eventtype" formControlName="eventType">
-                    <ion-option>Open</ion-option>
-                    <ion-option>State Level</ion-option>
-                    <ion-option>International</ion-option>
-                    <ion-option>Beginner Level</ion-option>
-                    <ion-option>Distruct Level</ion-option>
-                    <ion-option>Sausage</ion-option>
+                    <ion-option *ngFor="let item of eventTypes | async">{{item.name}}</ion-option>
                 </ion-select>
             </ion-item>
-            <div formArrayName="category" margin-bottom>
+
+            <div formArrayName="category" margin-bottom *ngIf="category">
                 <section [formGroupName]="i" *ngFor="let tech of form.controls.category.controls; let i = index">
                     <ion-item-group>
-                        <ion-item-divider color="light">category: {{ category}} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
+                        <ion-item-divider color="light">category: {{ category }} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
                             <ion-label>Event Category</ion-label>
                             <ion-select [(ngModel)]="category" formControlName="eventCategory">
-                                <ion-option>Under 11</ion-option>
-                                <ion-option>Under </ion-option>
-                                <ion-option>Extra Cheese</ion-option>
-                                <ion-option>Mushrooms</ion-option>
-                                <ion-option>Pepperoni</ion-option>
-                                <ion-option>Sausage</ion-option>
+                                <ion-option *ngFor="let item of ageCategory | async">{{item.name}}</ion-option>
                             </ion-select>
                         </ion-item>
                         <table class="table text-center">

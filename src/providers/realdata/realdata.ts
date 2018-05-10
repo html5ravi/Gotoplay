@@ -14,13 +14,13 @@ import { Item } from '../../models/item';
 */
 @Injectable()
 export class RealdataProvider {
-  
+  currentUserId:any;
   itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
   eventListRef$:AngularFireList<any>;
   constructor(private readonly db: AngularFireDatabase,private alertCtrl: AlertController) {
-      
-    
+      this.currentUserId = window.localStorage.getItem("currentUserId");
+      console.log('current User Id',this.currentUserId);
   }
   
   //: Observable<any>
@@ -55,6 +55,7 @@ export class RealdataProvider {
     let id = this.db.createPushId();
     if(id){
       obj.id = id;
+      obj.userId = this.currentUserId;
       return this.db.list(place).set(id, obj).then(res=>{
           let alert = this.alertCtrl.create({
           title: t,

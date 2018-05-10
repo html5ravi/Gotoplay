@@ -10,9 +10,10 @@
 <ion-content>
     <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.bannerPic + ')'">
     </div>
-    <button ion-button color="primary" center (click)="register(item)">Register</button>
-    <button ion-button color="primary" center (click)="fixtures(item)">Fixtures</button>
-    <button ion-button color="primary" center (click)="create_fixtures(item)">Create Fixtures</button>
+
+    <button *ngIf="item.eventShowType != 'past' && item.eventShowType != 'live'" ion-button color="primary" center (click)="register(item)">Register</button>
+    <button ion-button color="primary" center (click)="fixtures(item)">Results</button>
+    <button *ngIf="item.eventShowType != 'past' && item.eventShowType != 'live'" ion-button color="primary" center (click)="create_fixtures(item)">Create Fixtures</button>
     <div class="item-detail" padding>
         <h2>{{item.title}}</h2>
         <p>{{item.subTitle}}</p>

@@ -23,6 +23,7 @@ export class ListMasterPage {
   todayDate:Date=new Date();
   searchQuery: string = '';
   searchTerm: string = '';
+
   constructor(
     public navCtrl: NavController, 
     public rtp: RealdataProvider, 
@@ -64,7 +65,7 @@ export class ListMasterPage {
 
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
-      item.createdAt = this.today;
+      //item.createdAt = this.today;
       if (item) {
         //console.log(item)
         this.rtp.add(item,'Events','Added Successfuly!','Your Event Adde Successfuly, Please wait for the Admin approval to show in public.');
@@ -101,7 +102,8 @@ export class ListMasterPage {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
+  openItem(item: Item, type) {
+    item.eventShowType = type;
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });

@@ -13,7 +13,7 @@ import { Item } from '../../models/item';
 })
 export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
-
+  public today : number 	= Date.now();
   isReadyToSave: boolean;
   editItem:any;
   item: any;
@@ -22,14 +22,19 @@ export class ItemCreatePage {
   form: FormGroup;
   eventItem:any={};
   terms:Observable<Item[]>;
+  eventTypes:Observable<Item[]>;
+  ageCategory:Observable<Item[]>;
   maxYears:any = new Date().getFullYear()+2;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
     //this.editItem = navParams.get('item');
     this.terms = this.rtp.get('Terms').valueChanges();
+    this.eventTypes = this.rtp.get('eventType').valueChanges();
+    this.ageCategory = this.rtp.get('ageCategory').valueChanges();
 
      this.form = formBuilder.group({
         bannerPic: [''],
+        createdAt:[this.today],
         title: ['', Validators.required],
         subTitle: [''],
         startDate:[''],
@@ -171,15 +176,11 @@ export class ItemCreatePage {
   cancel() {
     this.viewCtrl.dismiss();
   }
-
-  /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
+  
   done() {
-    if (!this.form.valid) { return; }
+    if (!this.form.valid) { return; }    
     this.viewCtrl.dismiss(this.form.value);
-    console.log(this.form.value)
+    //console.log(this.form.value)
   }
 
   
