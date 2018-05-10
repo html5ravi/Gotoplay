@@ -8,8 +8,7 @@ import { FirstRunPage } from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
-
-import { FIREBASE_CREDENTIALS } from "../app/firebase-credentials";
+import { AuthProvider } from '../providers/auth/auth';
 import * as firebase from 'firebase'
 
 @Component({
@@ -19,7 +18,6 @@ import * as firebase from 'firebase'
 })
 export class MyApp {
   rootPage: any = 'TabsPage'; //FirstRunPage
-  profile:any = [];
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
@@ -37,21 +35,6 @@ export class MyApp {
   ]
 
   constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
-    firebase.initializeApp(FIREBASE_CREDENTIALS);
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {     
-      //console.log(user)
-      /*if (!user || user == null) {
-        console.log(user)
-        this.rootPage = 'TabsPage';//FirstRunPage;
-        //window.localStorage.setItem("currentUserId",user.uid);
-        unsubscribe();
-      } else {
-        console.log('else')
-        this.rootPage = FirstRunPage;//'TabsPage'; //later remove string ''
-        unsubscribe();
-      }*/
-    });
-
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -60,6 +43,27 @@ export class MyApp {
     });
     this.initTranslate();
   }
+
+
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     this.statusBar.styleDefault();
+  //   });
+
+  //   this.auth.afAuth.authState
+  //     .subscribe(
+  //       user => {
+  //         if (user) {
+  //           this.rootPage = HomePage;
+  //         } else {
+  //           this.rootPage = LoginPage;
+  //         }
+  //       },
+  //       () => {
+  //         this.rootPage = LoginPage;
+  //       }
+  //     );
+  // }
 
   logout(){
     firebase.auth().signOut();

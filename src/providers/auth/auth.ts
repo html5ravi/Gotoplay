@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import firebase from 'firebase';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+//import AuthProvider = firebase.auth.AuthProvider;
 /*
   Generated class for the AuthProvider provider.
 
@@ -10,8 +13,14 @@ import firebase from 'firebase';
 @Injectable()
 export class AuthProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
+  private user: firebase.User;
+
+  constructor(public afAuth: AngularFireAuth) {
+    afAuth.authState.subscribe(user => {
+			this.user = user;
+      console.log(user)
+      window.localStorage.setItem("currentUserId",user.uid);
+		});
   }
 
     //User Login
@@ -42,6 +51,7 @@ export class AuthProvider {
 
     //Logout
     logoutUser(): Promise<void> {
+      window.localStorage.clear()
       return firebase.auth().signOut();
     }
 
