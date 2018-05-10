@@ -22,21 +22,11 @@ export class ItemCreatePage {
   form: FormGroup;
   eventItem:any={};
   terms:Observable<Item[]>;
+  maxYears:any = new Date().getFullYear()+2;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
     //this.editItem = navParams.get('item');
     this.terms = this.rtp.get('Terms').valueChanges();
-
-    console.log(this.terms)
-    
-  
-    
-    
-    // if(this.editItem){
-    //   console.log("inside")
-    //   this.eventItem = this.editItem;
-        
-    // }
 
      this.form = formBuilder.group({
         bannerPic: [''],
