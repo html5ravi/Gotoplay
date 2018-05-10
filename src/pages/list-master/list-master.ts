@@ -20,6 +20,7 @@ export class ListMasterPage {
   eventObj:Observable<any[]>;
   events_segmnt:any;
   public today : number 	= Date.now();
+  todayDate:Date=new Date();
   searchQuery: string = '';
   searchTerm: string = '';
   constructor(

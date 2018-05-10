@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EventFilterPipe } from '../pipes/event-filter/event-filter';
 import {TimeAgoPipe} from 'time-ago-pipe';
-
+import { DatevalidatePipe } from '../pipes/datevalidate/datevalidate';
 
 @NgModule({
-    declarations:[EventFilterPipe,TimeAgoPipe],
+    declarations:[EventFilterPipe,TimeAgoPipe,DatevalidatePipe],
     imports:[
         IonicPageModule.forChild(EventFilterPipe),
-        IonicPageModule.forChild(TimeAgoPipe)
+        IonicPageModule.forChild([DatevalidatePipe,TimeAgoPipe])
     ],
-    exports:[EventFilterPipe,TimeAgoPipe],
+    exports:[EventFilterPipe,TimeAgoPipe,DatevalidatePipe],
     providers:[]
 })
 

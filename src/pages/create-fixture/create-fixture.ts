@@ -28,7 +28,7 @@ export class CreateFixturePage {
     {name:'G'},
     {name:'H'}
   ];
-
+  saveObj:any={};
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams,public rtp: RealdataProvider) {
     let item = navParams.get('item');
     console.log(item.id)
@@ -42,7 +42,9 @@ export class CreateFixturePage {
     this.createFixture = "create";       
         
   }
-
+  saveFixtures(obj){
+    console.log(obj)
+  }
   toggleEdit() {
     this.editing = !this.editing;
     if (this.editing) {

@@ -28,18 +28,22 @@
             <ion-list *ngIf="teams.length != 0">
                 <ion-item-group>
                     <ion-item *ngFor="let team of teams; let i =index">
+                        <!--<input type="hidden" [(ngModel)]="saveObj[team.id]">-->
+
                         <p><img src="assets/img/profile/200x200jordan.png" id="img13">
                             <label for="img13">{{team.yourName}}</label>
                         </p>
                         <p><img src="assets/img/profile/200x200jordan.png" id="img12">
                             <label for="img12">{{team.yourPartnerName}}</label></p>
-                        <select [(ngModel)]="assignToPool[i]">
+                        <select [(ngModel)]="saveObj.assignToPool[i]">
                             <option value="{{pool.name}}" *ngFor="let pool of poolArr">{{pool.name}}</option>
                         </select>
 
-
                     </ion-item>
                 </ion-item-group>
+                <ion-item>
+                    <button ion-button (click)="saveFixtures(saveObj)">Save</button>
+                </ion-item>
             </ion-list>
 
 

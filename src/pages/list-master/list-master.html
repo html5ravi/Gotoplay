@@ -45,7 +45,7 @@
             <!--<div class="mbsc-empty" *ngIf="eventObj.length == 0">
                 <h3>No Events</h3>
             </div>-->
-            <ion-item-sliding *ngFor="let item of currentItems | async | eventFilter: searchText">
+            <ion-item-sliding *ngFor="let item of currentItems | async | eventFilter: searchText | datevalidate:'past'">
                 <!--<div *ngIf="upcomingEvent(item.startDate)"> {{item.startDate}}</div>-->
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
@@ -69,7 +69,7 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'live'">
-            <ion-item-sliding *ngFor="let item of currentItems | async">
+            <ion-item-sliding *ngFor="let item of currentItems | async | datevalidate:'live'">
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
                     <img [src]="item.bannerPic"/>
@@ -90,7 +90,7 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'upcoming'">
-            <ion-item-sliding *ngFor="let item of currentItems | async">
+            <ion-item-sliding *ngFor="let item of currentItems | async | datevalidate:'upcoming'">
                 <button ion-item (click)="openItem(item)">
                     <ion-avatar item-start>
                     <img [src]="item.bannerPic"/>
