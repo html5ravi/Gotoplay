@@ -15,7 +15,7 @@ export class CreateFixturePage {
   editButton: string = 'Edit';
   editing: boolean = false;
   createFixture:any;
-  assignToPool:any=[];
+  //assignToPool:any={};
   pools:any;
   teams: any=[];
   poolArr:any = [
@@ -28,22 +28,25 @@ export class CreateFixturePage {
     {name:'G'},
     {name:'H'}
   ];
-  saveObj:any={};
+  saveObj:any={}
+  eventId:any;
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams,public rtp: RealdataProvider) {
-    let item = navParams.get('item');
-    console.log(item.id)
+    this.eventId = navParams.get('item');
     //this.teams = this.rtp.get('Events/'+item.id+'/Teams').valueChanges();
     this.loading = this.loadingCtrl.create();
     this.loading.present();
-    this.rtp.get('Events/'+item.id+'/Teams').valueChanges().subscribe(data=>{
+    this.rtp.get('Events/'+this.eventId.id+'/Teams').valueChanges().subscribe(data=>{
         this.teams = data;
+        console.log(this.teams);
         this.loading.dismiss();
     });
     this.createFixture = "create";       
         
   }
-  saveFixtures(obj){
-    console.log(obj)
+  saveFixtures(){
+    let place = 'Events/'+this.eventId.id+'/Teams';
+    // this.rtp.update(place,this.eventId.id,this.teams);
+    // console.log()
   }
   toggleEdit() {
     this.editing = !this.editing;

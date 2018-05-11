@@ -4,7 +4,7 @@
         <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Reorder</ion-title>
+        <ion-title>Create Fixture</ion-title>
         <ion-buttons end>
             <button ion-button (click)="toggleEdit()">{{editButton}}</button>
         </ion-buttons>
@@ -25,29 +25,23 @@
 <ion-content padding>
     <div [ngSwitch]="createFixture" class="fixturesList">
         <div *ngSwitchCase="'create'">
-            <ion-list *ngIf="teams.length != 0">
+            <ion-list>
                 <ion-item-group>
-                    <ion-item *ngFor="let team of teams; let i =index">
-                        <!--<input type="hidden" [(ngModel)]="saveObj[team.id]">-->
-
+                    <ion-item *ngFor="let team of teams; let i = index;">
                         <p><img src="assets/img/profile/200x200jordan.png" id="img13">
                             <label for="img13">{{team.yourName}}</label>
                         </p>
                         <p><img src="assets/img/profile/200x200jordan.png" id="img12">
                             <label for="img12">{{team.yourPartnerName}}</label></p>
-                        <select [(ngModel)]="saveObj.assignToPool[i]">
-                            <option value="{{pool.name}}" *ngFor="let pool of poolArr">{{pool.name}}</option>
+                        <select [(ngModel)]="team.pool">
+                            <option selected value="">Pool</option>
+                            <option [value]="pool.name" *ngFor="let pool of poolArr">{{pool.name}}</option>
                         </select>
 
                     </ion-item>
                 </ion-item-group>
-                <ion-item>
-                    <button ion-button (click)="saveFixtures(saveObj)">Save</button>
-                </ion-item>
             </ion-list>
-
-
-
+            <button ion-button (click)="saveFixtures()" color="primary" center>Save</button>
         </div>
         <!--<div *ngSwitchCase="'preview'" class="preview">
             <ion-segment [(ngModel)]="pools" color="primary">
@@ -124,4 +118,5 @@
             </div>
         </div>-->
     </div>
+
 </ion-content>
