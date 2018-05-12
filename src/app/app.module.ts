@@ -13,7 +13,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
-
+import { TabsPage } from '../pages/tabs/tabs';
 import { MyApp } from './app.component';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -61,6 +61,7 @@ export function provideSettings(storage: Storage) {
   declarations: [
     MyApp,
     MymodalComponent,
+    TabsPage
   ],
   imports: [    
     IonicPageModule.forChild(MymodalComponent),
@@ -82,7 +83,8 @@ export function provideSettings(storage: Storage) {
   exports:[MymodalComponent],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    TabsPage
   ],
   providers: [
     Api,

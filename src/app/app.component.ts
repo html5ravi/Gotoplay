@@ -9,7 +9,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
 import { AuthProvider } from '../providers/auth/auth';
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
+
 
 @Component({
   templateUrl: 'app.html',
@@ -17,7 +18,7 @@ import * as firebase from 'firebase'
   //template: `<ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any = 'TabsPage'; //FirstRunPage
+  rootPage: any; //FirstRunPage
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
@@ -34,7 +35,22 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+    
+    this.auth.afAuth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = TabsPage;
+          } else {
+            this.rootPage = 'LoginPage';
+          }
+        },
+        () => {
+          this.rootPage = 'FirstRunPage';
+        }
+      );
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -50,20 +66,8 @@ export class MyApp {
   //     this.statusBar.styleDefault();
   //   });
 
-  //   this.auth.afAuth.authState
-  //     .subscribe(
-  //       user => {
-  //         if (user) {
-  //           this.rootPage = HomePage;
-  //         } else {
-  //           this.rootPage = LoginPage;
-  //         }
-  //       },
-  //       () => {
-  //         this.rootPage = LoginPage;
-  //       }
-  //     );
-  // }
+    
+  
 
   logout(){
     firebase.auth().signOut();
