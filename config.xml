@@ -3,7 +3,7 @@
     <name>Gotoplay</name>
     <description>Badminton Event, Tournament app.</description>
     <author email="gotoplayinfo@gmail.com" href="http://ionicframework.com/">Gotoplay</author>
-    <content original-src="index.html" src="http://192.168.43.119:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
