@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators,FormArray } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController,NavParams } from 'ionic-angular';
 import { RealdataProvider } from '../../providers/realdata/realdata';
-
+import { Observable } from 'rxjs/Observable';
+import { Item } from '../../models/item';
 //import { Item } from '../../models/item';
 @IonicPage()
 @Component({
@@ -12,36 +13,28 @@ import { RealdataProvider } from '../../providers/realdata/realdata';
 })
 export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
-
+  public today : number 	= Date.now();
   isReadyToSave: boolean;
   editItem:any;
   item: any;
-  public contacts:any = [{mobile:"",name:""}];
+  public contacts:any = [{name:"",mobile:""}];
   public category:any = [{eventCategory:""}];
   form: FormGroup;
   eventItem:any={};
-  terms:any=[];
+  terms:Observable<Item[]>;
+  eventTypes:Observable<Item[]>;
+  ageCategory:Observable<Item[]>;
+  maxYears:any = new Date().getFullYear()+2;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,public formBuilder: FormBuilder, public camera: Camera,public rtp: RealdataProvider) {
     
-    this.editItem = navParams.get('item');
-    this.terms = this.rtp.get('Terms');
-
-    console.log(this.editItem)
-    
-  
-    
-    
-    if(this.editItem){
-      console.log("inside")
-      this.eventItem.title="Something went wrong";
-      this.eventItem.contacts=[{
-        name:"Ravi",
-        mobile:"8754875478"
-      }];      
-    }
+    //this.editItem = navParams.get('item');
+    this.terms = this.rtp.get('Terms').valueChanges();
+    this.eventTypes = this.rtp.get('eventType').valueChanges();
+    this.ageCategory = this.rtp.get('ageCategory').valueChanges();
 
      this.form = formBuilder.group({
         bannerPic: [''],
+        createdAt:[this.today],
         title: ['', Validators.required],
         subTitle: [''],
         startDate:[''],
@@ -58,22 +51,16 @@ export class ItemCreatePage {
           this.initCategoryFields()
         ]),
         eventType:[''],
-        terms:[[],Validators.required],
+        terms:[[]],
          medal:[false],
          goodies:[false],
          certificate:[false],
          refreshment:[false],
          lunch:[true],
-      });
-      
+      });      
       this.form.valueChanges.subscribe((v) => {
-      this.isReadyToSave = this.form.valid;
-    });
-    // }else{
-    //   console.log("edit section")   
-    // }
-    // Watch the form for changes, and
-    
+        this.isReadyToSave = this.form.valid;
+      });   
     
   }
 
@@ -189,15 +176,11 @@ export class ItemCreatePage {
   cancel() {
     this.viewCtrl.dismiss();
   }
-
-  /**
-   * The user is done and wants to create the item, so return it
-   * back to the presenter.
-   */
+  
   done() {
-    if (!this.form.valid) { return; }
+    if (!this.form.valid) { return; }    
     this.viewCtrl.dismiss(this.form.value);
-    console.log(this.form.value)
+    //console.log(this.form.value)
   }
 
   

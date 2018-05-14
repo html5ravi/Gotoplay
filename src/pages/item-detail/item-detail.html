@@ -11,160 +11,166 @@
     <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.bannerPic + ')'">
     </div>
 
-    <div class="item-detail" padding>
-        <h2>{{item.title}}</h2>
-        <p>{{item.subTitle}}</p>
-
-        <p>{{item.startDate}}</p>
-        <p>{{item.endDate}}</p>
-        <p>{{item.address1}}, {{item.address2}}, {{item.city}},{{item.state}},{{item.country}}</p>
-
-        <h3>Contacts</h3>
+    <button *ngIf="item.eventShowType != 'past' && item.eventShowType != 'live'" ion-button color="primary" center (click)="register(item)">Register</button>
+    <button ion-button color="primary" center (click)="fixtures(item)">Results</button>
+    <button *ngIf="item.eventShowType != 'past' && item.eventShowType != 'live'" ion-button color="primary" center (click)="create_fixtures(item)">Create Fixtures</button>
+    <div class="item-detail">
         <ion-list>
+            <ion-item>
+                <div class="event_title">{{item.title}}
+                    <span>{{item.subTitle}}</span>
+                </div>
+            </ion-item>
+
+            <ion-item>
+                Start date: {{item.startDate | date:'medium'}}<br> End date: {{item.endDate | date:'medium'}}
+            </ion-item>
+            <ion-list-header>
+                Address
+            </ion-list-header>
+            <ion-item>
+                {{item.address1}}, {{item.address2}}, {{item.city}},{{item.state}},{{item.country}}
+            </ion-item>
+            <ion-list-header>
+                Contacts
+            </ion-list-header>
             <ion-item *ngFor="let i of item.contacts">
                 <label>{{i.name}}</label>: <span>{{i.mobile}}</span>
             </ion-item>
-        </ion-list>
-
-        <h3>Event Type</h3>
-        <ion-list>
+            <ion-list-header>
+                Event Type : {{item.eventType}}
+            </ion-list-header>
             <ion-item>
-                {{item.eventType}}
-            </ion-item>
-        </ion-list>
-        <div *ngFor="let item of item.category">
-            <h3>Category: {{item.eventCategory}}</h3>
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                        <th width="70">#</th>
-                        <th>MD</th>
-                        <th>MS</th>
-                        <th>WD</th>
-                        <th>WS</th>
-                        <th>XD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Entry</td>
-                        <td>
-                            {{item.md_entry}}
-                        </td>
-                        <td>
-                            {{item.ms_entry}}
-                        </td>
-                        <td>
-                            {{item.wd_entry}}
-                        </td>
-                        <td>
-                            {{item.ws_entry}}
-                        </td>
-                        <td>
-                            {{item.xd_entry}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1st Prize</td>
-                        <td>
-                            {{item.md_1st}}
-                        </td>
-                        <td>
-                            {{item.ms_1st}}
-                        </td>
-                        <td>
-                            {{item.wd_1st}}
-                        </td>
-                        <td>
-                            {{item.ws_1st}}
-                        </td>
-                        <td>
-                            {{item.xd_1st}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2nd Prize</td>
-                        <td>
-                            {{item.md_2nd}}
-                        </td>
-                        <td>
-                            {{item.ms_2nd}}
-                        </td>
-                        <td>
-                            {{item.wd_2nd}}
-                        </td>
-                        <td>
-                            {{item.ws_2nd}}
-                        </td>
-                        <td>
-                            {{item.xd_2nd}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3rd Prize</td>
-                        <td>
-                            {{item.md_3rd}}
-                        </td>
-                        <td>
-                            {{item.ms_3rd}}
-                        </td>
-                        <td>
-                            {{item.wd_3rd}}
-                        </td>
-                        <td>
-                            {{item.ws_3rd}}
-                        </td>
-                        <td>
-                            {{item.xd_3rd}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4th Prize</td>
-                        <td>
-                            {{item.md_4th}}
-                        </td>
-                        <td>
-                            {{item.ms_4th}}
-                        </td>
-                        <td>
-                            {{item.wd_4th}}
-                        </td>
-                        <td>
-                            {{item.ws_4th}}
-                        </td>
-                        <td>
-                            {{item.xd_4th}}
-                        </td>
-                    </tr>
-                </tbody>
+                <div *ngFor="let item of item.category">
+                    <h3>Category: {{item.eventCategory}}</h3>
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th width="70">#</th>
+                                <th>MD</th>
+                                <th>MS</th>
+                                <th>WD</th>
+                                <th>WS</th>
+                                <th>XD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Entry</td>
+                                <td>
+                                    {{item.md_entry}}
+                                </td>
+                                <td>
+                                    {{item.ms_entry}}
+                                </td>
+                                <td>
+                                    {{item.wd_entry}}
+                                </td>
+                                <td>
+                                    {{item.ws_entry}}
+                                </td>
+                                <td>
+                                    {{item.xd_entry}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1st Prize</td>
+                                <td>
+                                    {{item.md_1st}}
+                                </td>
+                                <td>
+                                    {{item.ms_1st}}
+                                </td>
+                                <td>
+                                    {{item.wd_1st}}
+                                </td>
+                                <td>
+                                    {{item.ws_1st}}
+                                </td>
+                                <td>
+                                    {{item.xd_1st}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2nd Prize</td>
+                                <td>
+                                    {{item.md_2nd}}
+                                </td>
+                                <td>
+                                    {{item.ms_2nd}}
+                                </td>
+                                <td>
+                                    {{item.wd_2nd}}
+                                </td>
+                                <td>
+                                    {{item.ws_2nd}}
+                                </td>
+                                <td>
+                                    {{item.xd_2nd}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3rd Prize</td>
+                                <td>
+                                    {{item.md_3rd}}
+                                </td>
+                                <td>
+                                    {{item.ms_3rd}}
+                                </td>
+                                <td>
+                                    {{item.wd_3rd}}
+                                </td>
+                                <td>
+                                    {{item.ws_3rd}}
+                                </td>
+                                <td>
+                                    {{item.xd_3rd}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4th Prize</td>
+                                <td>
+                                    {{item.md_4th}}
+                                </td>
+                                <td>
+                                    {{item.ms_4th}}
+                                </td>
+                                <td>
+                                    {{item.wd_4th}}
+                                </td>
+                                <td>
+                                    {{item.ws_4th}}
+                                </td>
+                                <td>
+                                    {{item.xd_4th}}
+                                </td>
+                            </tr>
+                        </tbody>
 
-            </table>
-        </div>
+                    </table>
+                </div>
+            </ion-item>
+            <ion-list-header>
+                Other Details
+            </ion-list-header>
 
-        <h3>Terms & Conditions</h3>
-        <ion-list>
-            <ion-item *ngFor="let term of item.terms">
-                {{term}}
-            </ion-item>
-        </ion-list>
+            <ul>
+                <li *ngIf="item.lunch">Lunch: Yes</li>
+                <li *ngIf="item.refreshment">Refreshment: Yes</li>
+                <li *ngIf="item.certificate">Certificate: Yes</li>
+                <li *ngIf="item.goodies">Goodies: Yes</li>
+                <li *ngIf="item.medal">Medal: Yes</li>
+            </ul>
 
-        <h3>Other Details</h3>
-        <ion-list>
-            <ion-item *ngIf="item.lunch">
-                Lunch: Yes
-            </ion-item>
-            <ion-item *ngIf="item.refreshment">
-                Refreshment: Yes
-            </ion-item>
-            <ion-item *ngIf="item.certificate">
-                Certificate: Yes
-            </ion-item>
-            <ion-item *ngIf="item.goodies">
-                Goodies: Yes
-            </ion-item>
-            <ion-item *ngIf="item.medal">
-                Medal: Yes
-            </ion-item>
+
+            <ion-list-header>
+                Terms & Conditions
+            </ion-list-header>
+            <ul>
+                <li *ngFor="let term of item.terms">
+                    {{term}}
+                </li>
+            </ul>
         </ion-list>
     </div>
 </ion-content>

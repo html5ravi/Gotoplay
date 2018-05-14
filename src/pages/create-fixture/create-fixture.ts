@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,reorderArray } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,reorderArray,LoadingController,Loading } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { RealdataProvider } from '../../providers/realdata/realdata';
+import { Item } from '../../models/item';
 
-/**
- * Generated class for the CreateFixturePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,62 +11,43 @@ import { IonicPage, NavController, NavParams,reorderArray } from 'ionic-angular'
   templateUrl: 'create-fixture.html',
 })
 export class CreateFixturePage {
-  songs:any[];
+  public loading: Loading;
   editButton: string = 'Edit';
   editing: boolean = false;
   createFixture:any;
+  //assignToPool:any={};
   pools:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.createFixture = "create";
-    this.pools = "a";
-    this.songs = [
-    {
-      title: 'Everything Beta',
-      band: 'Phoria',
-      album: 'Volition'
-    },
-    {
-      title: 'Hello',
-      band: 'Adele',
-      album: '25'
-    },
-    {
-      title: 'Bohemian Rhapsody',
-      band: 'Queen',
-      album: 'A Night at the Opera'
-    },
-    {
-      title: 'Don\'t Stop Believin\'',
-      band: 'Journey',
-      album: 'Escape'
-    },
-    {
-      title: 'Smells Like Teen Spirit',
-      band: 'Nirvana',
-      album: 'Nevermind'
-    },
-    {
-      title: 'All You Need Is Love',
-      band: 'The Beatles',
-      album: 'Magical Mystery Tour'
-    },
-    {
-      title: 'Hotel California',
-      band: 'The Eagles',
-      album: 'Hotel California'
-    },
-    {
-      title: 'The Hand That Feeds',
-      band: 'Nine Inch Nails',
-      album: 'With Teeth'
-    },
-    {
-      title: 'Who Are You',
-      band: 'The Who',
-      album: 'Who Are You'
-    }];
-      }
-
+  teams: any=[];
+  poolArr:any = [
+    {name:'A'},
+    {name:'B'},
+    {name:'C'},
+    {name:'D'},
+    {name:'E'},
+    {name:'F'},
+    {name:'G'},
+    {name:'H'}
+  ];
+  saveObj:any={}
+  eventId:any;
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams,public rtp: RealdataProvider) {
+    this.eventId = navParams.get('item');
+    //this.teams = this.rtp.get('Events/'+item.id+'/Teams').valueChanges();
+    this.loading = this.loadingCtrl.create();
+    this.loading.present();
+    this.rtp.get('Events/'+this.eventId.id+'/Teams').valueChanges().subscribe(data=>{
+        this.teams = data;
+        console.log(this.teams);
+        this.loading.dismiss();
+    });
+    this.createFixture = "create";       
+        
+  }
+  saveFixtures(){
+    let place = 'Events/'+this.eventId.id+'/Teams';
+    // this.rtp.update(place,this.eventId.id,this.teams);
+    // console.log()
+  }
   toggleEdit() {
     this.editing = !this.editing;
     if (this.editing) {
@@ -82,7 +60,7 @@ export class CreateFixturePage {
   
 
   reorderData(indexes: any) {
-    this.songs = reorderArray(this.songs, indexes);
+    this.teams = reorderArray(this.teams, indexes);
   }
 
 }

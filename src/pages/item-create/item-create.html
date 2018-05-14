@@ -44,10 +44,10 @@
                     <ion-input type="text" placeholder="Sub title" formControlName="subTitle" [(ngModel)]="eventItem.subTitle"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="Starte Date" [(ngModel)]="eventItem.startDate" formControlName="startDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="{{maxYears}}" placeholder="Starte Date" [(ngModel)]="eventItem.startDate" formControlName="startDate"></ion-datetime>
                 </ion-item>
                 <ion-item>
-                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" placeholder="End Date" [(ngModel)]="eventItem.endDate" formControlName="endDate"></ion-datetime>
+                    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" max="{{maxYears}}" min="{{eventItem.startDate}}" placeholder="End Date" [(ngModel)]="eventItem.endDate" formControlName="endDate"></ion-datetime>
                 </ion-item>
             </ion-list>
             <ion-list>
@@ -83,10 +83,10 @@
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
-                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name" [(ngModel)]="eventItem.contacts.name"></ion-input>
+                            <ion-input type="text" placeholder="Name" maxlength="50" formControlName="name"></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile" [(ngModel)]="eventItem.contacts.mobile"></ion-input>
+                            <ion-input type="tel" placeholder="Mobile" maxlength="10" formControlName="mobile"></ion-input>
                         </ion-item>
                     </ion-item-group>
                 </section>
@@ -98,29 +98,20 @@
             <ion-item>
                 <ion-label>Event Type</ion-label>
                 <ion-select [(ngModel)]="eventItem.eventtype" formControlName="eventType">
-                    <ion-option>Open</ion-option>
-                    <ion-option>State Level</ion-option>
-                    <ion-option>International</ion-option>
-                    <ion-option>Beginner Level</ion-option>
-                    <ion-option>Distruct Level</ion-option>
-                    <ion-option>Sausage</ion-option>
+                    <ion-option *ngFor="let item of eventTypes | async">{{item.name}}</ion-option>
                 </ion-select>
             </ion-item>
-            <div formArrayName="category" margin-bottom>
+
+            <div formArrayName="category" margin-bottom *ngIf="category">
                 <section [formGroupName]="i" *ngFor="let tech of form.controls.category.controls; let i = index">
                     <ion-item-group>
-                        <ion-item-divider color="light">category: {{ category}} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
+                        <ion-item-divider color="light">category: {{ category }} <span float-right ion-button icon-left clear *ngIf="form.controls.category.length > 1" (click)="removeCategory(i)">
                         <ion-icon name="close" color="danger"></ion-icon>
                     </span></ion-item-divider>
                         <ion-item>
                             <ion-label>Event Category</ion-label>
                             <ion-select [(ngModel)]="category" formControlName="eventCategory">
-                                <ion-option>Under 11</ion-option>
-                                <ion-option>Under </ion-option>
-                                <ion-option>Extra Cheese</ion-option>
-                                <ion-option>Mushrooms</ion-option>
-                                <ion-option>Pepperoni</ion-option>
-                                <ion-option>Sausage</ion-option>
+                                <ion-option *ngFor="let item of ageCategory | async">{{item.name}}</ion-option>
                             </ion-select>
                         </ion-item>
                         <table class="table text-center">
@@ -283,138 +274,5 @@
                 </ion-card-content>
             </ion-card>
         </section>
-
-        <!--
-
-       
-
-        <section class="matchDetails">
-            <ion-card-header>
-                Match Category
-            </ion-card-header>
-            <ion-list>
-                <ion-item>
-                    <ion-label>Event Type</ion-label>
-                    <ion-select interface="popover">
-                        <ion-option value="">Open to All</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-label>Age Category</ion-label>
-                    <ion-select interface="popover">
-                        <ion-option value="">Above 40</ion-option>
-                        <ion-option value="">Below 40</ion-option>
-                    </ion-select>
-                </ion-item>
-            </ion-list>
-            <table class="table table-striped text-center table-dark">
-                <thead>
-                    <tr>
-                        <th width="70">#</th>
-                        <th>MD</th>
-                        <th>MS</th>
-                        <th>WD</th>
-                        <th>WS</th>
-                        <th>XD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Entry</td>
-                        <td>
-                            <input type="number" />
-                        </td>
-                        <td>
-                            <input type="number" />
-                        </td>
-                        <td>
-                            <input type="number" />
-                        </td>
-                        <td>
-                            <input type="number" />
-                        </td>
-                        <td>
-                            <input type="number" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1st Prize</td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2nd Prize</td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3rd Prize</td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4th Prize</td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                        <td>
-                            <input type="text" />
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
-        </section>
-
-        -->
-        <button ion-button block margin-top color="primary" text-center [disabled]="!form.valid">Submit</button>
     </form>
 </ion-content>

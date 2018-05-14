@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController,Loading, LoadingController,  AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController,Loading, LoadingController,  AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../validators/email';
@@ -22,7 +22,8 @@ export class SignupPage {
     public authProvider: AuthProvider,
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public menu:MenuController,
   ) {
       this.signupForm = formBuilder.group({
         email: ['',
@@ -58,4 +59,13 @@ export class SignupPage {
         this.loading.present();
       }
     }
+  ionViewDidEnter() {
+    // the root left menu should be disabled on the tutorial page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
+  }
 }

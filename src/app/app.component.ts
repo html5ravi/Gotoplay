@@ -8,9 +8,9 @@ import { FirstRunPage } from '../pages/pages';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
+import { AuthProvider } from '../providers/auth/auth';
+import * as firebase from 'firebase';
 
-import { FIREBASE_CREDENTIALS } from "../app/firebase-credentials";
-import * as firebase from 'firebase'
 
 @Component({
   templateUrl: 'app.html',
@@ -19,7 +19,6 @@ import * as firebase from 'firebase'
 })
 export class MyApp {
   rootPage: any; //FirstRunPage
-  profile:any = [];
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
@@ -36,21 +35,21 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
-    firebase.initializeApp(FIREBASE_CREDENTIALS);
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {     
-      //console.log(user)
-      if (!user || user == null) {
-        console.log(user)
-        this.rootPage = 'TabsPage';//FirstRunPage;
-        //window.localStorage.setItem("currentUserId",user.uid);
-        unsubscribe();
-      } else {
-        console.log('else')
-        this.rootPage = 'TabsPage';//'TabsPage'; //later remove string ''
-        unsubscribe();
-      }
-    });
+  constructor(private translate: TranslateService, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+    
+    this.auth.afAuth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = TabsPage;
+          } else {
+            this.rootPage = 'LoginPage';
+          }
+        },
+        () => {
+          this.rootPage = 'FirstRunPage';
+        }
+      );
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -60,6 +59,16 @@ export class MyApp {
     });
     this.initTranslate();
   }
+
+
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     this.statusBar.styleDefault();
+  //   });
+
+    
+  
+
   logout(){
     firebase.auth().signOut();
   }

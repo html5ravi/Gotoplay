@@ -1,4 +1,16 @@
 page-login {
+    .scroll-content {
+        background: url('../assets/img/login_bg.png') no-repeat center;
+        background-position: cover;
+    }
+    .logo {
+        text-align: center;
+        img {
+            width: 120px;
+            height: 120px;
+            margin-top: 100px;
+        }
+    }
     .invalid {
         border-bottom: 1px solid #ff6153;
     }
@@ -19,6 +31,16 @@ page-login {
             .facebook-auth-button {
                 background: $fb;
             }
+        }
+    }
+    .loginForm {
+        margin-top: 40px;
+        .item-md {
+            background-color: rgba(0, 0, 0, 0.6) !important;
+            color: #fff;
+        }
+        .button-clear-md {
+            color: #d3ffea !important;
         }
     }
 }

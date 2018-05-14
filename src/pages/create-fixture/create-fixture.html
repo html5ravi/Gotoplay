@@ -4,7 +4,7 @@
         <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Reorder</ion-title>
+        <ion-title>Create Fixture</ion-title>
         <ion-buttons end>
             <button ion-button (click)="toggleEdit()">{{editButton}}</button>
         </ion-buttons>
@@ -27,33 +27,23 @@
         <div *ngSwitchCase="'create'">
             <ion-list>
                 <ion-item-group>
-                    <ion-item *ngFor="let team of teams">
-
-
-
+                    <ion-item *ngFor="let team of teams; let i = index;">
                         <p><img src="assets/img/profile/200x200jordan.png" id="img13">
-                            <label for="img13">Bhuvaneshkumar</label>
+                            <label for="img13">{{team.yourName}}</label>
                         </p>
                         <p><img src="assets/img/profile/200x200jordan.png" id="img12">
-                            <label for="img12">Bhuvaneshkumar</label></p>
-
-
-                        <!--<ion-select [(ngModel)]="assignToPool">
-                                        <ion-option value="AP">A</ion-option>
-                                        <ion-option value="BP">B</ion-option>
-                                        <ion-option value="CP">C</ion-option>
-                                        <ion-option value="DP">D</ion-option>
-                                    </ion-select>-->
-
+                            <label for="img12">{{team.yourPartnerName}}</label></p>
+                        <select [(ngModel)]="team.pool">
+                            <option selected value="">Pool</option>
+                            <option [value]="pool.name" *ngFor="let pool of poolArr">{{pool.name}}</option>
+                        </select>
 
                     </ion-item>
                 </ion-item-group>
             </ion-list>
-
-
-
+            <button ion-button (click)="saveFixtures()" color="primary" center>Save</button>
         </div>
-        <div *ngSwitchCase="'preview'" class="preview">
+        <!--<div *ngSwitchCase="'preview'" class="preview">
             <ion-segment [(ngModel)]="pools" color="primary">
                 <ion-segment-button value="a">
                     A
@@ -72,7 +62,7 @@
                 <div *ngSwitchCase="'a'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img9">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -86,7 +76,7 @@
                 <div *ngSwitchCase="'b'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img3">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -100,7 +90,7 @@
                 <div *ngSwitchCase="'c'">
                     <ion-list>
                         <ion-item-group [reorder]="true">
-                            <ion-item *ngFor="let team of teams; let i = index">
+                            <ion-item *ngFor="let team of teams | async; let i = index">
                                 <p><img src="assets/img/profile/200x200jordan.png" id="img5">
                                     <label for="img1">Bhuvaneshkumar</label>
                                 </p>
@@ -126,6 +116,7 @@
                     </ion-list>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
+
 </ion-content>

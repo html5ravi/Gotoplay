@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { RealdataProvider } from '../../providers/realdata/realdata';
 
 @IonicPage()
 @Component({
@@ -9,9 +9,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ItemDetailPage {
   item: any;
+  currentItems:any;
   
-  constructor(public navCtrl: NavController, navParams: NavParams) {
+  constructor(public navCtrl: NavController, navParams: NavParams,public rtp: RealdataProvider,public modalCtrl: ModalController) {
     this.item = navParams.get('item');
+    
+  }
+
+  register(id){
+    this.navCtrl.push('RegisterTeamPage', {
+      item: this.item
+    });
+  }
+  fixtures(obj){
+    this.navCtrl.push('FixturesPage', {
+      item: this.item
+    });
+  }
+  create_fixtures(){
+    this.navCtrl.push('CreateFixturePage', {
+      item: this.item
+    });
   }
 
 }

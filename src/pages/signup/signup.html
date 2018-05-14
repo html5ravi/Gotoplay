@@ -1,13 +1,5 @@
-<ion-header>
-
-    <ion-navbar>
-        <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
-    </ion-navbar>
-
-</ion-header>
-
 <ion-content padding>
-    <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+    <form [formGroup]="signupForm" (submit)="signupUser()" novalidate class="signup">
 
         <ion-item>
             <ion-label stacked>Email</ion-label>

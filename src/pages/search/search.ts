@@ -16,7 +16,7 @@ export class SearchPage {
   currentItems: any = [];
 listItems: Observable<Item[]>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public items: RealdataProvider) { 
-    this.listItems = this.items.get('Events');
+    //this.listItems = this.items.get('Events');
   }
 
   /**

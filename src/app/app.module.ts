@@ -13,7 +13,7 @@ import { Items } from '../mocks/providers/items';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
-
+import { TabsPage } from '../pages/tabs/tabs';
 import { MyApp } from './app.component';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -30,15 +30,17 @@ import { DbProvider } from '../providers/db/db';
 // in Ionic's static asset pipeline.
 
 import { MymodalComponent } from '../components/mymodal/mymodal';
-import { EventsService } from '../pages/events/events.service';
+//import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
-
-
-
+import { AngularFireDatabase } from 'angularfire2/database';
+import { StringFilterPipe} from './string-filter.pipe';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+// import * as firebase from "firebase";
+// export default !firebase.apps.length ? firebase.initializeApp(FIREBASE_CREDENTIALS) : firebase.app();
 
 export function provideSettings(storage: Storage) {
   /**
@@ -58,9 +60,10 @@ export function provideSettings(storage: Storage) {
 @NgModule({
   declarations: [
     MyApp,
-    MymodalComponent
+    MymodalComponent,
+    TabsPage
   ],
-  imports: [
+  imports: [    
     IonicPageModule.forChild(MymodalComponent),
     FormsModule,
     HttpModule,
@@ -80,15 +83,17 @@ export function provideSettings(storage: Storage) {
   exports:[MymodalComponent],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    TabsPage
   ],
   providers: [
     Api,
     RealdataProvider,
     AngularFirestore,
-    EventsService,
+    //EventsService,
     NativeStorage,    
     Facebook,
+    AngularFireDatabase,
     Items,
     User,
     Camera,
@@ -99,6 +104,7 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
     DbProvider,
+    AngularFireAuth,
     RealdataProvider
   ]
 })

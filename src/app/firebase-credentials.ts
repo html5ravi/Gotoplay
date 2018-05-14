@@ -1,9 +1,8 @@
-export const FIREBASE_CREDENTIALS = {        
-    apiKey: "AIzaSyAs6y2A9YBFoEF0q2IHnynYRl8oyyReGHc",
-    authDomain: "gotoplay-6b14b.firebaseapp.com",
-    databaseURL: "https://gotoplay-6b14b.firebaseio.com",
-    projectId: "gotoplay-6b14b",
-    storageBucket: "gotoplay-6b14b.appspot.com",
-    messagingSenderId: "400965274155"
-
-}
+export const FIREBASE_CREDENTIALS = {
+    apiKey: "AIzaSyBEimVo2XEbXKvhC2sHj47B26w9xodFNag",
+    authDomain: "gotoplay-in.firebaseapp.com",
+    databaseURL: "https://gotoplay-in.firebaseio.com",
+    projectId: "gotoplay-in",
+    storageBucket: "",
+    messagingSenderId: "657039097480"
+  }

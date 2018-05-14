@@ -1,0 +1,40 @@
+<!--
+  Generated template for the RegisterTeamPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Register Your Team</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <!---->
+    <ion-list>
+        <ion-item>
+            <ion-label>Choose age category</ion-label>
+            <ion-select [(ngModel)]="register.category">
+                <ion-option *ngFor="let item of categoryList" value="{{item.eventCategory}}">{{item.eventCategory}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-input type="text" placeholder="Your Name" [(ngModel)]="register.yourName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" placeholder="Your Partner Name" [(ngModel)]="register.yourPartnerName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" placeholder="Your partner Mobile" [(ngModel)]="register.yourPartnerMobile"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button ion-button color="primary" (click)="registerTeam(register)">Register</button>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

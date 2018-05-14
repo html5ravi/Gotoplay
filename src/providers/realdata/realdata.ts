@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore,AngularFirestoreCollection } from 'angularfire2/firestore';
- //import { Observable } from 'rxjs/Observable';
+import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import firebase from 'firebase';
+ import { Observable } from 'rxjs/Observable';
 import { Item } from '../../models/item';
 //export interface Item {title:string, subTitle:string, bannerPic:string;}
 /*
@@ -12,45 +14,99 @@ import { Item } from '../../models/item';
 */
 @Injectable()
 export class RealdataProvider {
-  private itemsCollection: AngularFirestoreCollection<Item>;
-  
- 
-  constructor(private readonly afs: AngularFirestore) {
-    
-    //this.items = this.itemsCollection.valueChanges();
-    //this.itemsCollection = afs.collection<Item>('items');
-    
-    }
-  
-
-  add(obj,place) {
-    //console.log(obj,"add/edit");
-    const eventCollection = this.afs.collection<Item>(place);
-    eventCollection.add(obj)
-    .then(function(docRef) {
-     // console.log("Document written with ID: ", docRef.id);
-      obj.id=docRef.id;
-      eventCollection.doc(docRef.id).set(obj);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+  currentUserId:any;
+  itemsRef: AngularFireList<any>;
+  items: Observable<any[]>;
+  eventListRef$:AngularFireList<any>;
+  constructor(private readonly db: AngularFireDatabase,private alertCtrl: AlertController) {
+      this.currentUserId = window.localStorage.getItem("currentUserId");
+      console.log('current User Id',this.currentUserId);
   }
+  
+  //: Observable<any>
+   renderEvents(place) : Promise<any>
+    {
+        return new Promise((resolve) =>
+        {
+            this.eventListRef$ = this.db.list(place);
+            this.eventListRef$.valueChanges().subscribe(data=>{
+                resolve(data);
+            });            
+        });                       
+        
+    }
+
+  
 
   get(place){
-    this.itemsCollection = this.afs.collection<Item>(place);
-    return this.itemsCollection.valueChanges();
+    return this.db.list(place);
+    
+    // return new Promise((resolve) =>
+    //     {
+    //         this.itemsRef = this.db.list(place);
+    //         this.itemsRef.subscribe(data=>{
+    //             resolve(data);
+    //         });
+    //     });   
+    //return this.itemsRef = this.db.list(place);
+  }
+  add(obj,place,t,st) {
+    //console.log(obj)
+    let id = this.db.createPushId();
+    if(id){
+      obj.id = id;
+      obj.userId = this.currentUserId;
+      return this.db.list(place).set(id, obj).then(res=>{
+          let alert = this.alertCtrl.create({
+          title: t,
+          subTitle: st,
+          buttons: ['Ok']
+        });
+        alert.present();
+      });
+    }
   }
 
-  delete(obj,place){  
-    this.itemsCollection = this.afs.collection<Item>(place);
-    this.itemsCollection.doc(obj.id).delete();
+  update(place,key,obj) {
+    //this.itemsRef.update(key, obj);
+    firebase
+          .database()
+          .ref(place)
+          .child(key)
+          .set(obj);
   }
 
-  update(obj,place){  
-    this.itemsCollection = this.afs.collection<Item>(place);
-    this.itemsCollection.doc(obj.id).update(obj);
+  delete(place,key,title,msg) {
+    
+        let alert = this.alertCtrl.create({
+        title: title,
+        message: msg,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              //console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.db.list(place).remove(key);
+            }
+          }
+        ]
+      });
+      alert.present();
+    
   }
+
+  deleteEverything() {
+    this.itemsRef.remove();
+  }
+
+
+
 
   
 }
