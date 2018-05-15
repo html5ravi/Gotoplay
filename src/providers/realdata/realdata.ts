@@ -36,7 +36,9 @@ export class RealdataProvider {
         
     }
 
-  
+  getObj(place){
+    return this.db.object(place);
+  }
 
   get(place){
     return this.db.list(place);

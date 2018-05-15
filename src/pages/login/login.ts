@@ -4,7 +4,7 @@ import { IonicPage, Loading, NavController, ToastController,LoadingController, A
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
-
+import { Facebook } from '@ionic-native/facebook';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EmailValidator } from '../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -29,6 +29,11 @@ export class LoginPage {
   public loginForm: FormGroup;
   public loading: Loading;
 
+  isLoggedIn:boolean = false;
+  users: any;
+
+
+
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
@@ -38,6 +43,7 @@ export class LoginPage {
     public authProvider: AuthProvider,
     public formBuilder: FormBuilder,
     public menu: MenuController,
+    private fb: Facebook
     ) {
 
       this.loginForm = formBuilder.group({
@@ -49,7 +55,22 @@ export class LoginPage {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
+    });
+
+
+    fb.getLoginStatus()
+    .then(res => {
+      console.log(res.status);
+      if(res.status === "connect") {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
     })
+    .catch(e => console.log(e));
+
+
+
   }
 
 
@@ -90,34 +111,34 @@ export class LoginPage {
     this.navCtrl.push('ResetPasswordPage');
   }
 
-  fbLogin(){
-    var provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-      var user = result.user;
-      console.log(result)
-      window.localStorage.setItem("currentUserId",user.uid);
-      this.navCtrl.setRoot('TabsPage');        
-        firebase.database()
-          .ref('/userProfile')
-          .child(result.user.uid)
-          .set({ 
-            email: user.email,
-            displayName: user.displayName,
-            photo: user.photoURL,
-            phoneNumber: user.phoneNumber
-          });
+  // fbLogin(){
+  //   var provider = new firebase.auth.FacebookAuthProvider();
+  //   firebase.auth().signInWithPopup(provider).then(function(result) {
+  //     var user = result.user;
+  //     console.log(result)
+  //     window.localStorage.setItem("currentUserId",user.uid);
+  //     this.navCtrl.setRoot('TabsPage');        
+  //       firebase.database()
+  //         .ref('/userProfile')
+  //         .child(result.user.uid)
+  //         .set({ 
+  //           email: user.email,
+  //           displayName: user.displayName,
+  //           photo: user.photoURL,
+  //           phoneNumber: user.phoneNumber
+  //         });
           
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-  }
+  //   }).catch(function(error) {
+  //     // Handle Errors here.
+  //     var errorCode = error.code;
+  //     var errorMessage = error.message;
+  //     // The email of the user's account used.
+  //     var email = error.email;
+  //     // The firebase.auth.AuthCredential type that was used.
+  //     var credential = error.credential;
+  //     // ...
+  //   });
+  // }
 
 
 ionViewDidEnter() {
@@ -131,7 +152,59 @@ ionViewDidEnter() {
   }
   
 
+  login() {
+  
+  this.fb.login(['email'])
+    .then( response => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+        .then( users => { 
+          console.log("Firebase res: " + JSON.stringify(users));
+          this.navCtrl.setRoot('TabsPage'); 
+          firebase.database()
+          .ref('/userProfile')
+          .child(users.uid)
+          .set({ 
+            email: users.email,
+            displayName: users.displayName,
+            photoURL: users.photoURL
+          });
+        });
 
+    }).catch((error) => { console.log(error) });
+    //this.fb.login(['public_profile', 'email'])
+    // .then(res => {
+    //   if(res.status === "connected") {
+    //     this.isLoggedIn = true;
+    //     this.getUserDetail(res.authResponse.userID);
+    //   } else {
+    //     this.isLoggedIn = false;
+    //   }
+    // })
+    // .catch(e => console.log('Error logging into Facebook', e));
+};
+
+getUserDetail(userid) {
+  this.fb.api("/"+userid+"/?fields=id,email,name,picture",["public_profile"])
+    .then(res => {
+      console.log(res);
+      this.users = res;
+      this.navCtrl.setRoot('TabsPage');        
+        // firebase.database()
+        //   .ref('/userProfile')
+        //   .child(users.uid)
+        //   .set({ 
+        //     email: user.email,
+        //     displayName: user.displayName,
+        //     photo: user.photoURL,
+        //     phoneNumber: user.phoneNumber
+        //   });
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
 
  
 }

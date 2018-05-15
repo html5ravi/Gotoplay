@@ -5,12 +5,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FirstRunPage } from '../pages/pages';
-import { TabsPage } from '../pages/tabs/tabs';
+// import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
 import { AuthProvider } from '../providers/auth/auth';
 import * as firebase from 'firebase';
-
+import { RealdataProvider } from '../providers/realdata/realdata';
 
 @Component({
   templateUrl: 'app.html',
@@ -20,9 +20,10 @@ import * as firebase from 'firebase';
 export class MyApp {
   rootPage: any; //FirstRunPage
   @ViewChild(Nav) nav: Nav;
-
+  profile:any;
   pages: any[] = [
     { title: 'Tutorial', component: 'TutorialPage' },
+    { title: 'My Profile', component: 'ProfilePage' },
     { title: 'Welcome', component: 'WelcomePage' },
     { title: 'Tabs', component: 'TabsPage' },
     { title: 'Cards', component: 'CardsPage' },
@@ -35,13 +36,18 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, public rtp: RealdataProvider, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     
     this.auth.afAuth.authState
       .subscribe(
-        user => {
+        user => {                 
+          //console.log("user details:", user)
           if (user) {
-            this.rootPage = TabsPage;
+            this.rtp.getObj(`userProfile/${user.uid}`).valueChanges().subscribe(res=>{
+              this.profile = res;
+              console.log("user details:", this.profile)
+            });   
+            this.rootPage = 'TabsPage';
           } else {
             this.rootPage = 'LoginPage';
           }
