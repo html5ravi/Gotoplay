@@ -15,11 +15,11 @@
 
 <ion-content>
     <div class="headerMenu" (click)="getPicture()">
-        <div class="bg"> <img src="{{photoURL}}" alt="" onerror="{{onErrorPic}}"></div>
-        <div class="profile"><img src="{{photoURL}}" alt="" onerror="{{onErrorPic}}"></div>
+        <div class="bg"> <img src="{{profile.photoURL}}" (error)="onErrorPic"></div>
+        <div class="profile"><img src="{{profile.photoURL}}" (error)="onErrorPic"></div>
         <div class="name">
-            <span>Ravi Govindasami</span>
-            <span>Karnataka</span>
+            <span>{{profile.displayName}}</span>
+            <span>{{profile.email}}</span>
         </div>
     </div>
 

@@ -12,19 +12,19 @@ export class DatevalidatePipe implements PipeTransform {
     
   transform(val: any, args?) {
     let items;
-    let todayDate = new Date().toDateString();
+    let todayDate = new Date().getTime();
     if(val){
       if(args == 'past'){
         return items = val.filter((item) => {
-          let con = new Date(item.startDate).toDateString();
-          if(todayDate < con){
+          let con = new Date(item.startDate).getTime();
+          if(todayDate > con){
             return todayDate;
           }
         })
       }
       if(args == 'live'){
         return items = val.filter((item) => {
-          let con = new Date(item.startDate).toDateString();
+          let con = new Date(item.startDate).getTime();
           if(todayDate == con){
             return todayDate;
           }
@@ -32,8 +32,8 @@ export class DatevalidatePipe implements PipeTransform {
       }
       if(args == 'upcoming'){
         return items = val.filter((item) => {
-          let con = new Date(item.startDate).toDateString();
-          if(todayDate > con){
+          let con = new Date(item.startDate).getTime();
+          if(todayDate < con){
             return todayDate;
           }
         })

@@ -17,8 +17,9 @@ import firebase from 'firebase';
 })
 export class ProfilePage {
   @ViewChild('fileInput') fileInput;
+  profile:any = JSON.parse(window.localStorage.getItem("user"));
   form: FormGroup;
-  photoURL:any;
+
   onErrorPic:any;
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, public camera: Camera, public alertCtrl: AlertController) {
     this.onErrorPic = "assets/img/profile/200x200jordan.png";
@@ -27,6 +28,10 @@ export class ProfilePage {
       });      
       
   }
+
+  setDefaultPic() {
+  //this.pic = "assets/img/profile/200x200jordan.png";
+}
 
   getPicture() {
     if (Camera['installed']()) {
@@ -52,7 +57,7 @@ export class ProfilePage {
 
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
-      this.photoURL = imageData;
+      //this.profile.photoURL = imageData;
       this.uploadToFS(imageData);
     };
 

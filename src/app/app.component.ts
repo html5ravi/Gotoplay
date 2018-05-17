@@ -12,6 +12,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import * as firebase from 'firebase';
 import { RealdataProvider } from '../providers/realdata/realdata';
 
+
 @Component({
   templateUrl: 'app.html',
   selector: 'my-app',
@@ -45,9 +46,15 @@ export class MyApp {
           if (user) {
             this.rtp.getObj(`userProfile/${user.uid}`).valueChanges().subscribe(res=>{
               this.profile = res;
+              window.localStorage.setItem("user",JSON.stringify(res));
+              if(this.profile.photoURL == undefined){
+                this.rootPage = 'ProfilePage';
+              }else{
+                this.rootPage = 'TabsPage';
+              }
               console.log("user details:", this.profile)
             });   
-            this.rootPage = 'TabsPage';
+            
           } else {
             this.rootPage = 'LoginPage';
           }

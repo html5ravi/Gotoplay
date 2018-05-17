@@ -111,35 +111,7 @@ export class LoginPage {
     this.navCtrl.push('ResetPasswordPage');
   }
 
-  // fbLogin(){
-  //   var provider = new firebase.auth.FacebookAuthProvider();
-  //   firebase.auth().signInWithPopup(provider).then(function(result) {
-  //     var user = result.user;
-  //     console.log(result)
-  //     window.localStorage.setItem("currentUserId",user.uid);
-  //     this.navCtrl.setRoot('TabsPage');        
-  //       firebase.database()
-  //         .ref('/userProfile')
-  //         .child(result.user.uid)
-  //         .set({ 
-  //           email: user.email,
-  //           displayName: user.displayName,
-  //           photo: user.photoURL,
-  //           phoneNumber: user.phoneNumber
-  //         });
-          
-  //   }).catch(function(error) {
-  //     // Handle Errors here.
-  //     var errorCode = error.code;
-  //     var errorMessage = error.message;
-  //     // The email of the user's account used.
-  //     var email = error.email;
-  //     // The firebase.auth.AuthCredential type that was used.
-  //     var credential = error.credential;
-  //     // ...
-  //   });
-  // }
-
+  
 
 ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page
@@ -152,7 +124,7 @@ ionViewDidEnter() {
   }
   
 
-  login() {
+  fblogin() {
   
   this.fb.login(['email'])
     .then( response => {
@@ -173,38 +145,8 @@ ionViewDidEnter() {
         });
 
     }).catch((error) => { console.log(error) });
-    //this.fb.login(['public_profile', 'email'])
-    // .then(res => {
-    //   if(res.status === "connected") {
-    //     this.isLoggedIn = true;
-    //     this.getUserDetail(res.authResponse.userID);
-    //   } else {
-    //     this.isLoggedIn = false;
-    //   }
-    // })
-    // .catch(e => console.log('Error logging into Facebook', e));
 };
 
-getUserDetail(userid) {
-  this.fb.api("/"+userid+"/?fields=id,email,name,picture",["public_profile"])
-    .then(res => {
-      console.log(res);
-      this.users = res;
-      this.navCtrl.setRoot('TabsPage');        
-        // firebase.database()
-        //   .ref('/userProfile')
-        //   .child(users.uid)
-        //   .set({ 
-        //     email: user.email,
-        //     displayName: user.displayName,
-        //     photo: user.photoURL,
-        //     phoneNumber: user.phoneNumber
-        //   });
-    })
-    .catch(e => {
-      console.log(e);
-    });
-}
 
  
 }
