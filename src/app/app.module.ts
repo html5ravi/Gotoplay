@@ -23,7 +23,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth'
 import { FIREBASE_CREDENTIALS } from "./firebase-credentials";
 import { Facebook } from '@ionic-native/facebook';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { DbProvider } from '../providers/db/db';
 // The translate loader needs to know where to load i18n files
@@ -66,9 +65,8 @@ export function provideSettings(storage: Storage) {
   imports: [    
     IonicPageModule.forChild(MymodalComponent),
     FormsModule,
-    HttpModule,
-    BrowserModule,
     HttpClientModule,
+    BrowserModule,
     AngularFireModule.initializeApp(FIREBASE_CREDENTIALS),
     TranslateModule.forRoot({
       loader: {
