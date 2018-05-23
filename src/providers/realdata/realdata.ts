@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import firebase from 'firebase';
  import { Observable } from 'rxjs/Observable';
-import { Item } from '../../models/item';
+// import { Item } from '../../models/item';
 //export interface Item {title:string, subTitle:string, bannerPic:string;}
 /*
   Generated class for the RealdataProvider provider.

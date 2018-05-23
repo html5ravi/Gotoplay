@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { RealdataProvider } from '../../providers/realdata/realdata';
-import { Item } from '../../models/item';
-import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
+// import { Item } from '../../models/item';
+// import { Observable } from 'rxjs/Observable';
+// import firebase from 'firebase';
 import {AngularFireDatabase } from 'angularfire2/database';
 /**
  * Generated class for the RegisterTeamPage page.

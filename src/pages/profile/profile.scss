@@ -8,14 +8,12 @@ page-profile {
             top: 0px;
             bottom: 0;
             left: 0;
-            width: 105%;
+            width: 100%;
             overflow: hidden;
             z-index: 5;
             img {
                 width: 100%;
-                filter: blur(7px);
-                margin: -10px 0px 0 -7px;
-                opacity: .9;
+                margin: 0px;
             }
         }
         .profile {

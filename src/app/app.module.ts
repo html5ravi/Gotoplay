@@ -19,7 +19,7 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth'
+// import { AngularFireAuthModule } from 'angularfire2/auth'
 import { FIREBASE_CREDENTIALS } from "./firebase-credentials";
 import { Facebook } from '@ionic-native/facebook';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +32,7 @@ import { MymodalComponent } from '../components/mymodal/mymodal';
 //import { EventsService } from '../pages/events/events.service';
 import { RealdataProvider } from '../providers/realdata/realdata';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { StringFilterPipe} from './string-filter.pipe';
+// import { StringFilterPipe} from './string-filter.pipe';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 export function createTranslateLoader(http: HttpClient) {

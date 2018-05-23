@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,reorderArray,LoadingController,Loading } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 import { RealdataProvider } from '../../providers/realdata/realdata';
-import { Item } from '../../models/item';
+// import { Item } from '../../models/item';
 
 
 @IonicPage()
@@ -44,8 +44,8 @@ export class CreateFixturePage {
         
   }
   saveFixtures(){
-    let place = 'Events/'+this.eventId.id+'/Teams';
-    // this.rtp.update(place,this.eventId.id,this.teams);
+    let place = "Events/"+this.eventId.id+"/Teams";
+    this.rtp.update(place,this.eventId.id,this.teams);
     // console.log()
   }
   toggleEdit() {

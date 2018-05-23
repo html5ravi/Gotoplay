@@ -54,7 +54,7 @@ export class LoginPage {
       });
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
+      this.loginErrorString = value+"";
     });
 
 

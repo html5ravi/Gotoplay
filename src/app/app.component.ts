@@ -4,9 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages/pages';
+// import { FirstRunPage } from '../pages/pages';
 // import { TabsPage } from '../pages/tabs/tabs';
-import { LoginPage } from '../pages/login/login';
+// import { LoginPage } from '../pages/login/login';
 import { Settings } from '../providers/providers';
 import { AuthProvider } from '../providers/auth/auth';
 import * as firebase from 'firebase';

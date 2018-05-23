@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController,Loading, LoadingController,  AlertController, MenuController } from 'ionic-angular';
+// import { TranslateService } from '@ngx-translate/core';
+import { IonicPage, NavController, Loading, LoadingController,  AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../validators/email';
 
-import { User } from '../../providers/providers';
+// import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()

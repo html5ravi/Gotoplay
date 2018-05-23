@@ -50,7 +50,7 @@ export class ListMasterPage {
 
   upcomingEvent(dates){
     //console.log(dates)
-    let item = new Date(dates).getTime();
+    //let item = new Date(dates).getTime();
     // if(item >= this.today){
     //   return true;
     // }else{

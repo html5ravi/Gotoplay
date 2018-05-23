@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
+// import { Items } from '../../providers/providers';
 import { RealdataProvider } from '../../providers/realdata/realdata';
 import { Observable } from 'rxjs/Observable';
 
