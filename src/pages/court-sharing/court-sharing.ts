@@ -14,8 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'court-sharing.html',
 })
 export class CourtSharingPage {
-
+    
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   ionViewDidLoad() {

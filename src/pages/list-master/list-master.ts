@@ -38,6 +38,8 @@ export class ListMasterPage {
         this.loading.dismiss();
       }); 
 
+      
+
   }
 
   

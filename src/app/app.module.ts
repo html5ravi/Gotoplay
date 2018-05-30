@@ -35,12 +35,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
 // import { StringFilterPipe} from './string-filter.pipe';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 // import * as firebase from "firebase";
 // export default !firebase.apps.length ? firebase.initializeApp(FIREBASE_CREDENTIALS) : firebase.app();
-
+import { Network } from '@ionic-native/network';
 export function provideSettings(storage: Storage) {
   /**
    * The Settings provider takes a set of default settings for your app.
@@ -88,6 +89,7 @@ export function provideSettings(storage: Storage) {
     Api,
     RealdataProvider,
     AngularFirestore,
+    Network,
     //EventsService,
     NativeStorage,    
     Facebook,

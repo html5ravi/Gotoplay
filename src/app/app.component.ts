@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
+import { Network } from '@ionic-native/network';
 // import { FirstRunPage } from '../pages/pages';
 // import { TabsPage } from '../pages/tabs/tabs';
 // import { LoginPage } from '../pages/login/login';
@@ -38,7 +39,9 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, public rtp: RealdataProvider, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, 
+              private network: Network,
+              public rtp: RealdataProvider, private auth:AuthProvider,  platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     
     this.auth.afAuth.authState
       .subscribe(
@@ -51,7 +54,7 @@ export class MyApp {
               if(this.profile.photoURL == undefined){
                 this.rootPage = 'ProfilePage';
               }else{
-                this.rootPage = 'TabsPage';
+                this.rootPage = 'CourtSharingPage';
               }
               console.log("user details:", this.profile)
             });   
@@ -64,6 +67,14 @@ export class MyApp {
           this.rootPage = 'FirstRunPage';
         }
       );
+
+      // watch network for a disconnect
+      let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+        alert('network was disconnected :-(, Please connect wifi / mobile internet to continue!');
+      });
+
+      // stop disconnect watch
+      disconnectSubscription.unsubscribe();
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
