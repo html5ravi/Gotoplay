@@ -1,0 +1,70 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Add Payment details</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="cancel()">
+                <span color="primary" showWhen="ios">
+                  Cancel
+                </span>
+              <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+        <span color="primary" showWhen="ios">
+          Done
+        </span>
+        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+      </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <form *ngIf="form" [formGroup]="form">
+        <section class="general">
+            <ion-list>
+                <ion-item>
+                    <ion-input type="text" placeholder="Court fee / amount" formControlName="court_amount"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Court paid by</ion-label>
+                    <ion-select formControlName="courPaidBy">
+                        <ion-option value="IN" selected>India</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-input type="text" placeholder="Shuttle cost" formControlName="shuttle_amount"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Shuttle paid by</ion-label>
+                    <ion-select formControlName="shuttlePaidBy">
+                        <ion-option value="IN" selected>India</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Contributors</ion-label>
+                    <ion-select multiple="true" cancelText="Cancel" okText="Okay!" formControlName="contributors">
+                        <ion-option value="bacon" selected="true">Bacon</ion-option>
+                        <ion-option value="olives">Black Olives</ion-option>
+                        <ion-option value="xcheese" selected="true">Extra Cheese</ion-option>
+                        <ion-option value="peppers">Green Peppers</ion-option>
+                        <ion-option value="mushrooms">Mushrooms</ion-option>
+                        <ion-option value="onions">Onions</ion-option>
+                        <ion-option value="pepperoni">Pepperoni</ion-option>
+                        <ion-option value="pineapple">Pineapple</ion-option>
+                        <ion-option value="sausage">Sausage</ion-option>
+                        <ion-option value="Spinach">Spinach</ion-option>
+                    </ion-select>
+                </ion-item>
+
+            </ion-list>
+
+        </section>
+
+
+    </form>
+</ion-content>

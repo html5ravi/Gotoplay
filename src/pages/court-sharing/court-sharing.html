@@ -8,54 +8,128 @@
 
     <ion-navbar>
         <ion-title>Court sharing</ion-title>
+        <ion-toolbar>
+            <ion-segment [(ngModel)]="court_sharing_tabs" color="secondary">
+                <ion-segment-button value="payment">
+                    payment
+                </ion-segment-button>
+                <ion-segment-button value="activity">
+                    Activity
+                </ion-segment-button>
+                <ion-segment-button value="contributors">
+                    People
+                </ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
     </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <ion-card>
-        <ion-card-header>
-            Contributors
 
-            <ion-buttons end> <span text-left></span>
-                <button ion-button clear icon-only color="royal">
-                        <ion-icon name="add"></ion-icon>
-                    </button>
-            </ion-buttons>
 
-        </ion-card-header>
-        <ion-card-content>
-            <ion-list>
-                <ion-item *ngFor="let item of contributors">
-                    <ion-avatar item-start>
-                        <img [src]="item.img">
-                    </ion-avatar>
-                    <h2>{{item.name}}</h2>
-                    <ion-badge item-end>{{item.toPayAmount}}</ion-badge>
-                </ion-item>
-
-            </ion-list>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card>
-        <ion-list class="accordion-list">
-            <div *ngFor="let item of currentDates; let i = index">
-                <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+    <div [ngSwitch]="court_sharing_tabs">
+        <div *ngSwitchCase="'payment'">
+            <ion-card>
+                <ion-list class="accordion-list">
+                    <div *ngFor="let item of currentDates; let i = index" class="days">
+                        <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
                     <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
                     <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
-                    {{ item.date }}
+                    {{ item.date }} <label class="badge" for="">Rs.400.00</label>
                 </button>
-                <ion-item *ngIf="item.shuttleBy && item.open" no-lines>
-                    {{item.shuttleBy}}
-                </ion-item>
-            </div>
-        </ion-list>
-    </ion-card>
+                        <ion-item *ngIf="item.shuttleBy && item.open" no-lines>
+                            <table class="table">
+                                <tr>
+                                    <th>People</th>
+                                    <th>Court</th>
+                                    <th>Shuttle</th>
+                                    <th>Share</th>
+                                </tr>
+                                <tr>
+                                    <td>Noble</td>
+                                    <td>280</td>
+                                    <td>0</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>Ravi</td>
+                                    <td>0</td>
+                                    <td>120</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>Guru</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>100</td>
+                                </tr>
+                                <tr>
+                                    <td>Raghav</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>100</td>
+                                </tr>
+                            </table>
+                            <ion-buttons>
+                                <button ion-button icon-only (click)="addPaymentShare(item.date)">
+                                    <ion-icon name="add"></ion-icon>
+                                </button>
+                            </ion-buttons>
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </ion-card>
+        </div>
 
-    <ion-fab bottom center>
-        <button ion-fab><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
+        <div *ngSwitchCase="'activity'">
+            <ion-card>
+                <ion-card-header>Activity</ion-card-header>
+                <ion-card-content>
+                    <ion-list>
+                        <ion-item>
+                            Charts items
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <div *ngSwitchCase="'contributors'">
+            <ion-card>
+                <ion-card-header>Contributors</ion-card-header>
+                <ion-card-content>
+                    <ion-list *ngIf="contributors.length > 0">
+                        <ion-item *ngFor="let item of contributors">
+                            <ion-avatar item-start>
+                                <img [src]="item.img">
+                            </ion-avatar>
+                            <h2>{{item.name}}</h2>
+                            <ion-badge item-end>{{item.toPayAmount}}</ion-badge>
+                        </ion-item>
+                    </ion-list>
+                    <ion-list *ngIf="contributors.length == 0">
+                        <p>
+                            There are no Players to share! Click add button below and add players to share court, shuttle etc.
+                        </p>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card>
+            <ion-fab bottom center>
+                <button ion-fab (click)="addPeople()"><ion-icon name="add"></ion-icon></button>
+            </ion-fab>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
 
 </ion-content>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 /**
  * Generated class for the CourtSharingPage page.
  *
@@ -14,6 +13,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'court-sharing.html',
 })
 export class CourtSharingPage {
+    public court_sharing_tabs:any; 
     contributors:any=[
         {
             name:"Ravi G",
@@ -65,8 +65,8 @@ export class CourtSharingPage {
     ];
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+    this.court_sharing_tabs = "payment"; 
   }
 
   ionViewDidLoad() {
@@ -77,6 +77,28 @@ export class CourtSharingPage {
   toggleSection(i) {
     this.currentDates[i].open = !this.currentDates[i].open;
   } 
+
+  addPaymentShare(date) {
+    let addModal = this.modalCtrl.create('AddSharePaymentPage');
+    addModal.onDidDismiss(item => {
+      if (item) {
+        item.date =date;
+        console.log(item)
+      }
+    })
+    addModal.present();
+  }
+
+  addPeople() {
+    
+    let addModal = this.modalCtrl.create('AddPeoplePage');
+    addModal.onDidDismiss(item => {
+      if (item) {
+        console.log(item)
+      }
+    })
+    addModal.present();
+  }
   
 
 }
