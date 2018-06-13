@@ -27,6 +27,7 @@ export class AddPeoplePage {
   isReadyToSave: boolean;
   user_List:Observable<Item[]>;
   public loading: Loading;
+  public tempArr:any = [];
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public rtp: RealdataProvider, public camera: Camera, public viewCtrl: ViewController, public formBuilder: FormBuilder, public navParams: NavParams) {
     this.initializeItems();
     this.form = formBuilder.group({
@@ -49,6 +50,11 @@ export class AddPeoplePage {
     
   }
 
+  addToGroup(obj){
+    
+    this.tempArr.push(obj)
+    console.log(this.tempArr)
+  }
   
 
   cancel() {
