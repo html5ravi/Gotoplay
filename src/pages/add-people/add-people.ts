@@ -43,17 +43,36 @@ export class AddPeoplePage {
       //console.log(currentUser)
       //Get all users
       this.user_List = this.rtp.get('userProfile').valueChanges();
-      
+      console.log(this.user_List, "userrrrr list")
   }
   initializeItems() {
    
     
   }
 
-  addToGroup(obj){
+  addToGroup(obj,index){
+    //console.log(index);
+    obj.selected = !obj.selected;
+    if(obj.selected){
+      this.tempArr.push(obj);
+      //console.log(this.tempArr)
+    }else{
+      this.tempArr.splice(this.tempArr.findIndex(function(i){
+          return i.id === obj.id;
+      }), 1);
+      //this.tempArr.splice(_.indexOf(this.tempArr, _.findWhere(this.tempArr, { id : obj.id})), 1);
+      
+    }
     
-    this.tempArr.push(obj)
-    console.log(this.tempArr)
+    console.log(this.tempArr);
+    //   if(selecteddata.length > 0){
+
+    //   }
+    //   this.tempArr.push(obj)
+    // console.log(this.tempArr)
+
+    
+    
   }
   
 

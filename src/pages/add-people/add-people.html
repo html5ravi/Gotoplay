@@ -24,14 +24,23 @@
 
 
 <ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of tempArr">
+            <ion-avatar item-start>
+                <img src="{{item.photoURL}}">
+            </ion-avatar>
+        </ion-item>
+    </ion-list>
     <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
     <ion-list>
-        <ion-item *ngFor="let item of user_List | async | peopleFilter: searchText" (click)="addToGroup(item)">
+        <ion-item *ngFor="let item of user_List | async | peopleFilter: searchText; let i =index" (click)="addToGroup(item,i)">
             <ion-avatar item-start>
                 <img src="{{item.photoURL}}">
             </ion-avatar>
             <h2>{{ item.displayName }}</h2>
             <p>{{ item.email }}</p>
+
+            <p>Selected: {{item.selected}} </p>
         </ion-item>
     </ion-list>
 
