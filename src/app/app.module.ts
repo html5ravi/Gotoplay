@@ -34,7 +34,7 @@ import { RealdataProvider } from '../providers/realdata/realdata';
 import { AngularFireDatabase } from 'angularfire2/database';
 // import { StringFilterPipe} from './string-filter.pipe';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import { Toast } from '@ionic-native/toast';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -87,6 +87,7 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Api,
+    Toast,
     RealdataProvider,
     AngularFirestore,
     Network,

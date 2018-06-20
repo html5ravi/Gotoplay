@@ -60,7 +60,7 @@ export class MyApp {
             });   
             
           } else {
-            this.rootPage = 'LoginPage';
+            this.rootPage = 'TutorialPage';
           }
         },
         () => {

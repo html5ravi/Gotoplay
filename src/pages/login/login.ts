@@ -69,7 +69,9 @@ export class LoginPage {
     })
     .catch(e => console.log(e));
 
-
+    if(this.isLoggedIn){
+       this.navCtrl.setRoot(MainPage);
+    }
 
   }
 

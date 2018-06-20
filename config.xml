@@ -91,4 +91,5 @@
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.6.2" />
 </widget>

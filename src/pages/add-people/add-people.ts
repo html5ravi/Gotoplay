@@ -12,7 +12,9 @@ import { Observable } from 'rxjs/Observable';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+    priority: "low"
+})   
 @Component({
   selector: 'page-add-people',
   templateUrl: 'add-people.html',
@@ -26,7 +28,7 @@ export class AddPeoplePage {
   form: FormGroup;
   isReadyToSave: boolean;
   user_List:Observable<Item[]>;
-  public loading: Loading;
+  public loading: boolean;
   public tempArr:any = [];
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public rtp: RealdataProvider, public camera: Camera, public viewCtrl: ViewController, public formBuilder: FormBuilder, public navParams: NavParams) {
     this.initializeItems();
@@ -42,49 +44,52 @@ export class AddPeoplePage {
       let currentUser =JSON.parse(window.localStorage.getItem("user"));
       //console.log(currentUser)
       //Get all users
+      this.loading = true;
       this.user_List = this.rtp.get('userProfile').valueChanges();
-      console.log(this.user_List, "userrrrr list")
+      this.user_List.subscribe(
+        data=>{  },
+        err=>{},
+        ()=>{ this.loading = false; }
+      )
+      //console.log(this.user_List, "userrrrr list")
   }
   initializeItems() {
    
     
   }
 
-  addToGroup(obj,index){
-    //console.log(index);
+  addPplToGroup(obj){
     obj.selected = !obj.selected;
     if(obj.selected){
       this.tempArr.push(obj);
-      //console.log(this.tempArr)
     }else{
       this.tempArr.splice(this.tempArr.findIndex(function(i){
-          return i.id === obj.id;
+          return i.uid === obj.uid;
       }), 1);
-      //this.tempArr.splice(_.indexOf(this.tempArr, _.findWhere(this.tempArr, { id : obj.id})), 1);
       
     }
-    
-    console.log(this.tempArr);
-    //   if(selecteddata.length > 0){
-
-    //   }
-    //   this.tempArr.push(obj)
-    // console.log(this.tempArr)
-
-    
-    
   }
   
+  removePplFromGroup(obj){
+    obj.selected = !obj.selected;
+    if(!obj.selected){
+      this.tempArr.splice(this.tempArr.findIndex(function(i){
+          return i.uid === obj.uid;
+      }), 1);
+      
+    }
+  }
 
   cancel() {
     this.viewCtrl.dismiss();
   }
   
-  // done() {
-  //   if (!this.form.valid) { return; }    
-  //   this.viewCtrl.dismiss(this.form.value);
-  //   // console.log(this.form.value)
-  // }
+  done() {
+    if (!this.tempArr) { return; }    
+    this.viewCtrl.dismiss(this.tempArr);
+    this.rtp.add(this.tempArr,"Group","Added people into your group successfully!", "Added Group");
+    console.log(this.tempArr)
+  }
  
 
   

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
-/**
- * Generated class for the CourtSharingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams,ModalController, ToastController } from 'ionic-angular';
+import { Observable } from 'rxjs';
 
+interface userData{
+  photoURL:string,
+  displayName:string,
+  email:string,
+  selected?:boolean,
+  uid?:string
+}
 @IonicPage()
 @Component({
   selector: 'page-court-sharing',
@@ -63,10 +65,20 @@ export class CourtSharingPage {
             shuttleBy:"Guru"
         }
     ];
-  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+    public groupPpl:Observable<any>;
+    
+
+  constructor(public navCtrl: NavController, private toastCtrl:ToastController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.court_sharing_tabs = "payment"; 
+    
+    console.log(this.groupPpl)
+    const toast = this.toastCtrl.create({
+      message: 'User was created successfully',
+      position: 'middle',
+      duration: 3000
+    });
+    toast.present();
   }
 
   ionViewDidLoad() {
@@ -79,22 +91,21 @@ export class CourtSharingPage {
   } 
 
   addPaymentShare(date) {
-    let addModal = this.modalCtrl.create('AddSharePaymentPage');
-    addModal.onDidDismiss(item => {
+    let addModal2 = this.modalCtrl.create('AddSharePaymentPage');
+    addModal2.onDidDismiss(item => {
       if (item) {
         item.date =date;
         console.log(item)
       }
     })
-    addModal.present();
+    addModal2.present();
   }
 
-  addPeople() {
-    
+   addPeople() {
     let addModal = this.modalCtrl.create('AddPeoplePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        console.log(item)
+       this.groupPpl = item;
       }
     })
     addModal.present();

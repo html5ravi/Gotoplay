@@ -19,8 +19,9 @@ export class AuthProvider {
     afAuth.authState.subscribe(user => {
 			this.user = user;
       console.log(user)
-      
-      window.localStorage.setItem("currentUserId",user.uid);
+      if(user != null){
+        window.localStorage.setItem("currentUserId",user.uid);
+      }
 		});
   }
 

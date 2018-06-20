@@ -11,7 +11,7 @@
             </button>
         </ion-buttons>
         <ion-buttons end>
-            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+            <button ion-button (click)="done(tempArr)" [disabled]="!tempArr.length > 0" strong>
         <span color="primary" showWhen="ios">
           Done
         </span>
@@ -24,23 +24,24 @@
 
 
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let item of tempArr">
-            <ion-avatar item-start>
+    <ion-list *ngIf="tempArr.length > 0">
+        <ion-item>
+            <ion-avatar item-start *ngFor="let item of tempArr" (click)="removePplFromGroup(item)">
                 <img src="{{item.photoURL}}">
             </ion-avatar>
         </ion-item>
     </ion-list>
     <ion-searchbar [(ngModel)]="searchText"></ion-searchbar>
-    <ion-list>
-        <ion-item *ngFor="let item of user_List | async | peopleFilter: searchText; let i =index" (click)="addToGroup(item,i)">
+    <div *ngIf="loading">...Loading</div>
+    <ion-list *ngIf="!loading">
+        <ion-item *ngFor="let item of user_List | async | peopleFilter: searchText" (click)="addPplToGroup(item)">
             <ion-avatar item-start>
                 <img src="{{item.photoURL}}">
             </ion-avatar>
             <h2>{{ item.displayName }}</h2>
             <p>{{ item.email }}</p>
+            <ion-icon *ngIf="item.selected" name="checkmark" item-end></ion-icon>
 
-            <p>Selected: {{item.selected}} </p>
         </ion-item>
     </ion-list>
 
